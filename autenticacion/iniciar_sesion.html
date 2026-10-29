@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .auth-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: var(--space-8);
+      gap: var(--space-4);
+    }
+
+    .icon-badge-green {
+      width: 76px;
+      height: 76px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 2.25rem;
+      box-shadow: 0 10px 25px -4px rgba(22, 163, 74, 0.4);
+      margin-bottom: var(--space-2);
+    }
+
+    .auth-brand-name {
+      color: var(--color-green);
+      font-size: 0.95rem;
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .auth-title {
+      font-size: 1.65rem;
+      font-weight: var(--font-weight-extrabold);
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .auth-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .auth-form {
+      width: 100%;
+      margin-top: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    /* Divisor circular "O" */
+    .divider-circle {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: var(--space-3) 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .divider-circle::before,
+    .divider-circle::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .divider-circle span {
+      padding: 0 var(--space-3);
+      font-weight: var(--font-weight-medium);
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell app-shell--auth">
+    
+    <!-- Barra superior de navegación / volver -->
+    <header class="app-header" style="justify-content: flex-start;">
+      <a href="inicio.html" class="btn-icon" aria-label="Volver al inicio" title="Volver al inicio">
+        ‹
+      </a>
+    </header>
+
+    <main class="app-main" id="main-content">
+      
+      <section class="auth-container">
+        <!-- Ícono verde de Patita (fiel a Stitch) -->
+        <div class="icon-badge-green" aria-hidden="true">
+          🐾
+        </div>
+
+        <div>
+          <span class="auth-brand-name">Patitas Conectadas</span>
+          <h1 class="auth-title mt-1">BIENVENIDOS DE NUEVO</h1>
+          <p class="auth-subtitle mt-1">Inicia sesion para continuar</p>
+        </div>
+
+        <!-- Formulario con validación en tiempo real (especioficaciones.md - Sección 1) -->
+        <form class="auth-form" id="loginForm" novalidate onsubmit="handleLogin(event)">
+          
+          <!-- Campo Correo -->
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Correo Electronico</label>
+            <div class="input-wrapper">
+              <span class="input-icon-left" aria-hidden="true">@</span>
+              <input 
+                type="email" 
+                id="loginEmail" 
+                name="email" 
+                class="form-control" 
+                placeholder="ejemplo@patitas.com"
+                autocomplete="email"
+                required
+                oninput="validateEmail(this)"
+              >
+            </div>
+            <span class="form-feedback is-error" id="emailError" style="display: none;">
+              Por favor ingresa un correo electrónico válido.
+            </span>
+          </div>
+
+          <!-- Campo Contraseña -->
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Contraseña</label>
+            <div class="input-wrapper has-right-icon">
+              <span class="input-icon-left" aria-hidden="true">🔒</span>
+              <input 
+                type="password" 
+                id="loginPassword" 
+                name="password" 
+                class="form-control" 
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+                oninput="validatePassword(this)"
+              >
+              <button 
+                type="button" 
+                class="input-icon-right" 
+                id="togglePassBtn"
+                aria-label="Mostrar contraseña"
+                onclick="togglePasswordVisibility('loginPassword', this)"
+                style="background:none; border:none;"
+              >
+                👁️
+              </button>
+            </div>
+            <span class="form-feedback is-error" id="passError" style="display: none;">
+              La contraseña no puede estar vacía.
+            </span>
+          </div>
+
+          <!-- Botón de Inicio Verde de Alta Jerarquía -->
+          <button type="submit" class="btn btn-green btn-block btn-lg mt-2">
+            INICIAR SESION
+          </button>
+
+          <!-- Divisor "O" -->
+          <div class="divider-circle" aria-hidden="true">
+            <span>O</span>
+          </div>
+
+          <!-- Botón Secundario a Registrarme -->
+          <a href="registrarme.html" class="btn btn-secondary btn-block">
+            <span>Registrarme</span>
+            <span aria-hidden="true">›</span>
+          </a>
+
+        </form>
+      </section>
+
+    </main>
+
+    <!-- Footer común de Stitch -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #16a34a;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Toggle de visibilidad de contraseña
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.setAttribute('aria-label', 'Ocultar contraseña');
+        btn.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        btn.setAttribute('aria-label', 'Mostrar contraseña');
+        btn.textContent = '👁️';
+      }
+    }
+
+    // Validación inline de correo (WCAG & DCU)
+    function validateEmail(input) {
+      const errorSpan = document.getElementById('emailError');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!emailRegex.test(input.value.trim()) && input.value.trim().length > 0) {
+        input.classList.add('is-invalid');
+        errorSpan.style.display = 'block';
+        return false;
+      } else {
+        input.classList.remove('is-invalid');
+        errorSpan.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePassword(input) {
+      const errorSpan = document.getElementById('passError');
+      if (input.value.trim().length === 0) {
+        input.classList.add('is-invalid');
+        errorSpan.style.display = 'block';
+        return false;
+      } else {
+        input.classList.remove('is-invalid');
+        errorSpan.style.display = 'none';
+        return true;
+      }
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const emailInput = document.getElementById('loginEmail');
+      const passInput = document.getElementById('loginPassword');
+
+      const isEmailValid = validateEmail(emailInput);
+      const isPassValid = validatePassword(passInput);
+
+      if (isEmailValid && isPassValid && emailInput.value.length > 0 && passInput.value.length > 0) {
+        // Redirección simulada al portal de usuario
+        alert('¡Inicio de sesión exitoso! Redirigiendo...');
+        window.location.href = '../usuario/inicio.html';
+      } else {
+        if (!emailInput.value) emailInput.classList.add('is-invalid');
+        if (!passInput.value) passInput.classList.add('is-invalid');
+      }
+    }
+  </script>
+</body>
+</html>
+

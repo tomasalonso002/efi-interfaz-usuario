@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respuesta a Solicitud - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .response-form-sheet {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .recipient-banner {
+      background-color: #faf8f5;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-pill);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="solicitudes_adopcion.html" class="btn-icon" aria-label="Volver a solicitudes" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="text-center mb-3">
+        <h1 class="title-hero" style="font-size: 1.55rem; letter-spacing: 0.05em;">
+          SOLICITUDES DE ADOPCION
+        </h1>
+        <div style="width: 54px; height: 3px; background-color: var(--color-primary); margin: var(--space-2) auto 0; border-radius: var(--radius-pill);"></div>
+      </section>
+
+      <!-- Formulario de Respuesta (Fiel a Stitch) -->
+      <form class="response-form-sheet" id="responseForm" onsubmit="handleSendResponse(event)">
+        
+        <!-- Destinatario -->
+        <div class="recipient-banner">
+          <span style="color: var(--color-primary); font-size: 1.1rem;">👤</span>
+          <span>Para: <strong id="recipientName">Tomas Alonso</strong> • Solicitud <strong id="petName" class="text-primary">Mango</strong></span>
+        </div>
+
+        <!-- Campo de Mensaje -->
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="replyMessage" style="font-size: 0.95rem;">Enviar Mensaje:</label>
+          <textarea 
+            id="replyMessage" 
+            rows="6" 
+            class="form-control" 
+            maxlength="500" 
+            placeholder="Escribe una respuesta o mensaje al adoptante..." 
+            style="resize: vertical; font-size: 0.95rem;" 
+            required 
+            oninput="updateCharCount(this)"
+          ></textarea>
+          <div class="d-flex justify-end mt-1">
+            <span class="text-caption text-muted" id="charCounter">Máx. 500 caracteres (restan 500)</span>
+          </div>
+        </div>
+
+        <!-- Botón de Envío -->
+        <div class="d-flex justify-center mt-2">
+          <button type="submit" class="btn btn-primary btn-lg" style="min-width: 200px; box-shadow: 0 8px 24px rgba(223, 112, 84, 0.35);">
+            Enviar
+          </button>
+        </div>
+
+      </form>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Recuperar datos desde query params si existen
+    const urlParams = new URLSearchParams(window.location.search);
+    const candidate = urlParams.get('name');
+    const pet = urlParams.get('pet');
+    const status = urlParams.get('status');
+
+    if (candidate) document.getElementById('recipientName').textContent = candidate;
+    if (pet) document.getElementById('petName').textContent = pet;
+    if (status === 'Aprobada') {
+      document.getElementById('replyMessage').value = `¡Felicitaciones! Tu solicitud para adoptar a ${pet || 'Mango'} ha sido APROBADA. Te esperamos en el refugio este sábado para formalizar los papeles.`;
+    } else if (status === 'Rechazada') {
+      document.getElementById('replyMessage').value = `Hola. Agradecemos profundamente tu interés por adoptar a ${pet || 'Mango'}. En esta oportunidad seleccionamos a otro adoptante con mayor disponibilidad de espacio, ¡pero te invitamos a postularte por otros compañeros del refugio!`;
+    }
+
+    function updateCharCount(textarea) {
+      const remaining = 500 - textarea.value.length;
+      document.getElementById('charCounter').textContent = `Máx. 500 caracteres (restan ${remaining})`;
+    }
+
+    function handleSendResponse(e) {
+      e.preventDefault();
+      alert('¡Respuesta enviada exitosamente al adoptante!');
+      window.location.href = 'solicitudes_adopcion.html';
+    }
+  </script>
+</body>
+</html>
+

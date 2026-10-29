@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Animal - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .admin-detail-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2rem);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .admin-carousel-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background-color: var(--bg-surface-subtle);
+    }
+
+    .admin-carousel-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="animales.html" class="btn-icon" aria-label="Volver a lista" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Pantalla -->
+      <section class="text-center mb-1">
+        <h1 class="title-hero" style="font-size: 1.65rem;" id="animalHeading">Detalles de “Larry”</h1>
+      </section>
+
+      <!-- Ficha Técnica Administrativa -->
+      <article class="admin-detail-card" aria-label="Ficha de animal">
+        
+        <div class="admin-carousel-container">
+          <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Larry">
+        </div>
+
+        <div class="d-flex flex-column gap-3 pt-2">
+          <div class="d-flex justify-between align-center" style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2);">
+            <div style="font-size: 1.05rem;">
+              <strong class="text-main">Edad:</strong> <span class="text-muted">2 años</span>
+            </div>
+            <span class="badge badge-success">
+              <span class="badge-dot"></span> Disponible
+            </span>
+          </div>
+
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2); font-size: 1.05rem;">
+            <strong class="text-main">Tamaño:</strong> <span class="text-muted">Grande</span>
+          </div>
+
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2); font-size: 1.05rem;">
+            <strong class="text-main">Estado de salud:</strong> <span class="text-muted">Sano. Vacunado y desparasitado</span>
+          </div>
+
+          <div class="p-3" style="background-color: #fffaf6; border: 1px solid #fed7aa; border-radius: var(--radius-lg); font-size: 0.95rem; line-height: 1.55; color: var(--text-body);">
+            Muy juguetón, muy hiperactivo, así que se requiere un patio.
+          </div>
+        </div>
+
+        <!-- Botones de Acción: Editar y Eliminar -->
+        <div class="grid-2 mt-2">
+          <a href="editar_animal.html" class="btn btn-primary btn-block">
+            <span>✏️</span>
+            <span>Editar Animal</span>
+          </a>
+
+          <button class="btn btn-secondary btn-block" onclick="openConfirmDeleteModal()" style="color: var(--color-danger); border-color: #fecaca;">
+            <span>🗑️</span>
+            <span>Eliminar</span>
+          </button>
+        </div>
+
+      </article>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL 1: CONFIRMACIÓN DE BORRADO (Fiel a stitch/admin/confirmacion_borrar_animal.png) -->
+  <div class="modal-overlay" id="confirmDeleteModal" onclick="if(event.target === this) closeConfirmModal()">
+    <div class="modal-card">
+      <div class="modal-icon-badge modal-icon-badge--danger" aria-hidden="true">
+        🗑️
+      </div>
+      <h2 class="modal-title" style="font-size: 1.45rem;">Eliminar Animal</h2>
+      <p class="modal-desc" style="font-size: 0.95rem;">
+        ¿Estás seguro que querés eliminar este animal?
+      </p>
+      <div class="modal-warning-tag">
+        <span>⚠️</span>
+        <span>¡Esta acción es irreversible!</span>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-block" onclick="executeDelete()">
+          <span>🗑️</span>
+          <span>Sí, borrar el animal</span>
+        </button>
+        <button class="btn btn-secondary btn-block" onclick="closeConfirmModal()">
+          No, Volver
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ALERTA EL ANIMAL SE BORRÓ CORRECTAMENTE (Fiel a stitch/admin/alert_animal_se_borro.png) -->
+  <div class="modal-overlay" id="successDeleteAlert">
+    <div class="modal-card">
+      <div style="width: 72px; height: 72px; border-radius: var(--radius-circle); border: 3px solid #16a34a; background-color: #eafaf1; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 2.25rem;">
+        ✓
+      </div>
+      <h2 class="modal-title" style="font-size: 1.35rem; line-height: 1.3;">
+        El animal se borró correctamente
+      </h2>
+      <p class="modal-desc" style="font-size: 0.9rem; color: var(--text-muted);">
+        Los datos han sido removidos de la base del refugio de forma permanente.
+      </p>
+      <div class="modal-actions mt-2">
+        <a href="animales.html" class="btn btn-dark btn-block">
+          Volver
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    function openConfirmDeleteModal() {
+      document.getElementById('confirmDeleteModal').classList.add('is-active');
+    }
+    function closeConfirmModal() {
+      document.getElementById('confirmDeleteModal').classList.remove('is-active');
+    }
+
+    function executeDelete() {
+      document.getElementById('confirmDeleteModal').classList.remove('is-active');
+      document.getElementById('successDeleteAlert').classList.add('is-active');
+    }
+  </script>
+</body>
+</html>
+

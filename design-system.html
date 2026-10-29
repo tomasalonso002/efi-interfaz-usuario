@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Diseño UI - Patitas Conectadas</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* Estilos específicos para la página de documentación del sistema */
+    body {
+      background-color: #f1f0ea;
+      padding: var(--space-6) var(--space-4);
+    }
+    .ds-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-lg);
+    }
+    .ds-section {
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .ds-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .ds-title {
+      font-size: var(--h1-size);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--text-main);
+      margin-bottom: var(--space-2);
+    }
+    .ds-subtitle {
+      font-size: var(--body-size);
+      color: var(--text-muted);
+      margin-bottom: var(--space-6);
+    }
+    .ds-h2 {
+      font-size: var(--h2-size);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-main);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .ds-grid-colors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-4);
+    }
+    .color-card {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+    }
+    .color-swatch {
+      height: 70px;
+      width: 100%;
+    }
+    .color-meta {
+      padding: var(--space-3);
+      font-size: var(--caption-size);
+    }
+    .color-meta strong {
+      display: block;
+      color: var(--text-main);
+      font-size: var(--body-sm-size);
+      margin-bottom: 2px;
+    }
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .states-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-4);
+    }
+    .states-table th,
+    .states-table td {
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--border-light);
+      text-align: left;
+      font-size: var(--body-sm-size);
+    }
+    .states-table th {
+      background-color: var(--bg-surface-subtle);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-main);
+    }
+    .mock-phone {
+      max-width: 380px;
+      border: 8px solid #222;
+      border-radius: 36px;
+      overflow: hidden;
+      background: var(--bg-surface);
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ds-container">
+    <header class="ds-section">
+      <div class="d-flex align-center gap-2 mb-2">
+        <span style="font-size: 2rem;">🐾</span>
+        <h1 class="ds-title" style="margin: 0;">Sistema de Diseño UI</h1>
+      </div>
+      <p class="ds-subtitle">
+        Tokens, componentes e interactividad de <strong>Patitas Conectadas</strong> inspirados fielmente en las maquetas de Stitch y alineados con las normas WCAG AA de <code>especioficaciones.md</code>.
+      </p>
+    </header>
+
+    <!-- 1. PALETA DE COLORES -->
+    <section class="ds-section">
+      <h2 class="ds-h2">1. Paleta Semántica de Colores</h2>
+      <div class="ds-grid-colors">
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--color-primary);"></div>
+          <div class="color-meta">
+            <strong>Primario (Terracota)</strong>
+            <code>--color-primary</code>
+            <div>#df7054 • Identidad</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--color-green);"></div>
+          <div class="color-meta">
+            <strong>Verde (Acento)</strong>
+            <code>--color-green</code>
+            <div>#16a34a • Login / Éxito</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--color-dark);"></div>
+          <div class="color-meta">
+            <strong>Carbón (Dark)</strong>
+            <code>--color-dark</code>
+            <div>#2a2927 • Crear Cuenta</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--color-warning);"></div>
+          <div class="color-meta">
+            <strong>Warning (Alerta)</strong>
+            <code>--color-warning</code>
+            <div>#b45309 • Pendientes</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--color-danger);"></div>
+          <div class="color-meta">
+            <strong>Danger (Peligro)</strong>
+            <code>--color-danger</code>
+            <div>#dc2626 • Borrado</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--bg-page); border-bottom: 1px solid #ddd;"></div>
+          <div class="color-meta">
+            <strong>Fondo Página</strong>
+            <code>--bg-page</code>
+            <div>#faf8f5 • Crema suave</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ESCALA TIPOGRÁFICA -->
+    <section class="ds-section">
+      <h2 class="ds-h2">2. Jerarquía Tipográfica Sans-Serif</h2>
+      <div class="d-flex flex-column gap-3">
+        <div>
+          <span class="text-caption text-muted">H1 (32px / Bold 800)</span>
+          <h1 class="title-hero">PATITAS CONECTADAS</h1>
+        </div>
+        <div>
+          <span class="text-caption text-muted">H2 (24px / Bold 700 con indicador Gestalt)</span>
+          <h2 class="title-section">Nuestros animales</h2>
+        </div>
+        <div>
+          <span class="text-caption text-muted">H3 (20px / Bold 700)</span>
+          <h3 class="title-card">MILO (2 años)</h3>
+        </div>
+        <div>
+          <span class="text-caption text-muted">Body Base (16px / Regular 400 - WCAG 7.4:1)</span>
+          <p class="text-subtitle" style="color: var(--text-body);">
+            En Patitas Conectadas rescatamos, cuidamos y encontramos familias amorosas para perros, gatos y más.
+          </p>
+        </div>
+        <div>
+          <span class="text-caption text-muted">Caption (12px / Medium 500)</span>
+          <p class="text-caption">Macho • 2 años • Mediano • Todos los derechos reservados</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LOS 5 ESTADOS UI DE BOTONES (WCAG & AFFORDANCE) -->
+    <section class="ds-section">
+      <h2 class="ds-h2">3. Anatomía de Botones y sus 5 Estados UI</h2>
+      <p class="text-subtitle mb-4">
+        Cumpliendo la <strong>Sección 4 de especioficaciones.md</strong>: Default, Hover, Active, Focus A11y y Disabled.
+      </p>
+
+      <table class="states-table">
+        <thead>
+          <tr>
+            <th>Variante</th>
+            <th>Default / Interactivo</th>
+            <th>Deshabilitado (Disabled)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primario</strong> (.btn-primary)</td>
+            <td><button class="btn btn-primary">Registrarme 🐾</button></td>
+            <td><button class="btn btn-primary" disabled>Registrarme 🐾</button></td>
+          </tr>
+          <tr>
+            <td><strong>Verde Acento</strong> (.btn-green)</td>
+            <td><button class="btn btn-green">INICIAR SESIÓN</button></td>
+            <td><button class="btn btn-green" disabled>INICIAR SESIÓN</button></td>
+          </tr>
+          <tr>
+            <td><strong>Carbón</strong> (.btn-dark)</td>
+            <td><button class="btn btn-dark">Crear cuenta →</button></td>
+            <td><button class="btn btn-dark" disabled>Crear cuenta →</button></td>
+          </tr>
+          <tr>
+            <td><strong>Secundario</strong> (.btn-secondary)</td>
+            <td><button class="btn btn-secondary">No, Volver</button></td>
+            <td><button class="btn btn-secondary" disabled>No, Volver</button></td>
+          </tr>
+          <tr>
+            <td><strong>Peligro</strong> (.btn-danger)</td>
+            <td><button class="btn btn-danger">🗑️ Sí, borrar el animal</button></td>
+            <td><button class="btn btn-danger" disabled>🗑️ Sí, borrar el animal</button></td>
+          </tr>
+          <tr>
+            <td><strong>Íconos</strong> (.btn-icon)</td>
+            <td>
+              <button class="btn-icon" aria-label="Menú">☰</button>
+              <button class="btn-icon" aria-label="Favorito">❤️</button>
+            </td>
+            <td>
+              <button class="btn-icon" disabled aria-label="Menú">☰</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. CONTROLES DE FORMULARIO -->
+    <section class="ds-section">
+      <h2 class="ds-h2">4. Formularios e Inputs Accesibles</h2>
+      <div style="max-width: 400px;" class="d-flex flex-column gap-3">
+        <div class="form-group">
+          <label class="form-label" for="inp-email">Correo Electrónico</label>
+          <div class="input-wrapper">
+            <span class="input-icon-left">@</span>
+            <input type="email" id="inp-email" class="form-control" placeholder="ejemplo@patitas.com">
+          </div>
+          <span class="form-feedback">Ingresa el correo con el que te registraste.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-pass">Contraseña</label>
+          <div class="input-wrapper has-right-icon">
+            <span class="input-icon-left">🔒</span>
+            <input type="password" id="inp-pass" class="form-control" placeholder="••••••••">
+            <span class="input-icon-right" title="Mostrar contraseña">👁️</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-err">Campo con Validación Error</label>
+          <input type="text" id="inp-err" class="form-control is-invalid" value="tomas@invalido">
+          <span class="form-feedback is-error">⚠️ Formato de correo no válido.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CHIPS, BADGES Y ETIQUETAS DE ROL -->
+    <section class="ds-section">
+      <h2 class="ds-h2">5. Badges, Chips y Etiquetas de Rol</h2>
+      
+      <div class="mb-4">
+        <div class="text-caption text-muted mb-2">BADGES DE ROL (HEADER):</div>
+        <div class="component-row">
+          <span class="role-badge role-badge--user">User</span>
+          <span class="role-badge role-badge--vol">Vol.</span>
+          <span class="role-badge role-badge--admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <div class="text-caption text-muted mb-2">BADGES DE ESTADO (WCAG AA):</div>
+        <div class="component-row">
+          <span class="badge badge-success"><span class="badge-dot"></span> Disponible</span>
+          <span class="badge badge-warning"><span class="badge-dot"></span> Requiere revisión</span>
+          <span class="badge badge-danger"><span class="badge-dot"></span> Irreversible</span>
+          <span class="badge-trait">Cariñoso</span>
+          <span class="badge-trait">Juguetona</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-caption text-muted mb-2">CHIPS DE FILTRADO (CATEGORÍAS):</div>
+        <div class="filter-tabs">
+          <button class="filter-chip is-active">✨ Todos</button>
+          <button class="filter-chip">🐶 Perros</button>
+          <button class="filter-chip">🐱 Gatos</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMPONENTES VISUALES: TARJETA DE ANIMAL, STATS Y TAREAS -->
+    <section class="ds-section">
+      <h2 class="ds-h2">6. Componentes Principales de Stitch</h2>
+
+      <div class="grid-2" style="align-items: start;">
+        
+        <!-- Tarjeta de Animal -->
+        <div>
+          <span class="text-caption text-muted mb-2 d-block">TARJETA DE ANIMAL (.animal-card):</span>
+          <article class="animal-card">
+            <div class="animal-card__media">
+              <span class="badge badge-success badge-floating">
+                <span class="badge-dot"></span> Disponible
+              </span>
+              <!-- Imagen placeholder optimizada -->
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Perro mestizo Milo mirando a cámara">
+              <button class="btn-favorite" aria-label="Agregar a favoritos">❤️</button>
+            </div>
+            <div class="animal-card__body">
+              <div class="animal-card__header">
+                <h3 class="animal-card__name">MILO</h3>
+                <span class="badge-trait">Cariñoso</span>
+              </div>
+              <p class="animal-card__meta">Macho • 2 años • Mediano</p>
+              <button class="btn btn-secondary btn-block">VER DETALLES →</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tarjetas de Tareas y Métricas -->
+        <div class="d-flex flex-column gap-3">
+          <div>
+            <span class="text-caption text-muted mb-2 d-block">TARJETA DE MÉTRICA ADMIN (.stat-card):</span>
+            <div class="stat-card stat-card--accent-primary">
+              <div class="stat-card__icon-box">🐾</div>
+              <div class="stat-card__info">
+                <h4 class="stat-card__title">Animales disponibles:</h4>
+                <p class="stat-card__subtitle text-success">● Listos para hogar</p>
+              </div>
+              <div class="stat-card__value stat-card__value--primary">12</div>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-caption text-muted mb-2 d-block">TARJETA DE TAREA (.task-item):</span>
+            <div class="task-item">
+              <div class="task-item__icon">🧪</div>
+              <div class="task-item__content">
+                <h4 class="task-item__title">Baño y cepillado de Mango</h4>
+                <div class="task-item__meta">
+                  <span class="text-warning">● Pendiente hoy</span> • Refugio Central
+                </div>
+              </div>
+              <span class="text-muted">›</span>
+            </div>
+
+            <div class="task-item mt-2">
+              <div class="task-item__icon task-item__icon--done">✓</div>
+              <div class="task-item__content">
+                <h4 class="task-item__title">Vacunación de cachorros</h4>
+                <div class="task-item__meta text-muted">
+                  Completada hace 2h
+                </div>
+              </div>
+              <span class="text-muted">›</span>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-caption text-muted mb-2 d-block">INTERACTIVO: MODAL DE CONFIRMACIÓN</span>
+            <button class="btn btn-danger btn-block" onclick="document.getElementById('demo-modal').classList.add('is-active')">
+              Abrir Modal Eliminar Animal (Demo)
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL DE DEMO -->
+  <div id="demo-modal" class="modal-overlay" onclick="if(event.target === this) this.classList.remove('is-active')">
+    <div class="modal-card">
+      <div class="modal-icon-badge modal-icon-badge--danger">
+        🗑️
+      </div>
+      <h3 class="modal-title">Eliminar Animal</h3>
+      <p class="modal-desc">¿Estás seguro que querés eliminar este animal?</p>
+      <div class="modal-warning-tag">
+        ⚠️ ¡Esta acción es irreversible!
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-block" onclick="alert('Animal eliminado simulado'); document.getElementById('demo-modal').classList.remove('is-active')">
+          🗑️ Sí, borrar el animal
+        </button>
+        <button class="btn btn-secondary btn-block" onclick="document.getElementById('demo-modal').classList.remove('is-active')">
+          No, Volver
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

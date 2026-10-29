@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Tareas - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    @media (min-width: 860px) {
+      .admin-tasks-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge d-mobile-none">
+          <span class="brand-paw">🐾</span>
+          <span>Patitas Conectadas</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de administración">
+        <a href="inicio.html" class="header-nav-link">Inicio</a>
+        <a href="panel_administracion.html" class="header-nav-link">Resumen</a>
+        <a href="animales.html" class="header-nav-link">Animales</a>
+        <a href="voluntarios.html" class="header-nav-link">Voluntarios</a>
+        <a href="solicitudes_adopcion.html" class="header-nav-link">Adopciones</a>
+        <a href="tareas.html" class="header-nav-link is-active">Tareas</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">
+          👤 Admin
+        </span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección y Botón Crear -->
+      <section class="d-flex justify-between align-center">
+        <div>
+          <h1 class="title-hero" style="font-size: 1.65rem;">TAREAS</h1>
+          <p class="text-subtitle">Supervisión y asignación de actividades</p>
+        </div>
+
+        <a href="crear_tarea.html" class="btn btn-primary btn-sm" style="box-shadow: 0 4px 12px rgba(223, 112, 84, 0.35);">
+          <span>+</span>
+          <span>Nueva Tarea</span>
+        </a>
+      </section>
+
+      <!-- Lista de Tareas para Administrador -->
+      <section class="admin-tasks-grid mt-3 d-flex flex-column gap-3" aria-label="Lista de tareas del refugio">
+        
+        <article class="card p-4">
+          <div class="d-flex justify-between align-start">
+            <div>
+              <span class="badge badge-warning">
+                <span class="badge-dot"></span> Pendiente
+              </span>
+              <h2 class="title-card mt-2" style="font-size: 1.15rem;">Baño y cepillado de Mango</h2>
+              <p class="text-caption text-muted mt-1">Asignado a: <strong>Tomas Alonso</strong></p>
+            </div>
+            <span class="text-caption text-bold text-primary">Prioritaria</span>
+          </div>
+          <div class="d-flex justify-between align-center mt-3 pt-2" style="border-top: 1px solid var(--border-light);">
+            <span class="text-caption text-muted">Tiempo estimado: 30 min</span>
+            <a href="detalle_tarea.html" class="btn btn-secondary btn-sm">Ver Detalle ›</a>
+          </div>
+        </article>
+
+        <article class="card p-4">
+          <div class="d-flex justify-between align-start">
+            <div>
+              <span class="badge badge-warning">
+                <span class="badge-dot"></span> Pendiente
+              </span>
+              <h2 class="title-card mt-2" style="font-size: 1.15rem;">Paseo activo con Toby</h2>
+              <p class="text-caption text-muted mt-1">Asignado a: <strong>Sofia Martin</strong></p>
+            </div>
+            <span class="text-caption text-bold text-muted">Normal</span>
+          </div>
+          <div class="d-flex justify-between align-center mt-3 pt-2" style="border-top: 1px solid var(--border-light);">
+            <span class="text-caption text-muted">Tiempo estimado: 45 min</span>
+            <a href="detalle_tarea.html" class="btn btn-secondary btn-sm">Ver Detalle ›</a>
+          </div>
+        </article>
+
+        <article class="card p-4">
+          <div class="d-flex justify-between align-start">
+            <div>
+              <span class="badge badge-success">
+                <span class="badge-dot"></span> ✓ Completada
+              </span>
+              <h2 class="title-card mt-2" style="font-size: 1.15rem;">Limpieza y desinfección Canil 4</h2>
+              <p class="text-caption text-muted mt-1">Realizado por: <strong>Franco Gomez</strong></p>
+            </div>
+            <span class="text-caption text-muted">Hace 2h</span>
+          </div>
+          <div class="d-flex justify-between align-center mt-3 pt-2" style="border-top: 1px solid var(--border-light);">
+            <span class="text-caption text-success text-bold">Revisión veterinaria: Aprobada</span>
+            <a href="../voluntario/detalle_tarea_completa.html" class="btn btn-secondary btn-sm">Ver Detalle ›</a>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>●</span>
+        </a>
+        <a href="voluntarios.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>👥</span><span>Voluntarios</span></div>
+          <span>›</span>
+        </a>
+        <a href="solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>❤️</span><span>Adopciones</span></div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

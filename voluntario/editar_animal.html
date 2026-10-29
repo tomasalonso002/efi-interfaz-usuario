@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Animal - Portal Voluntario | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .form-sheet-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Voluntario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="detalle_animal.html" class="btn-icon" aria-label="Volver a detalle" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--vol">Vol.</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="mb-2 text-center text-md-left" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <h1 class="title-hero" style="font-size: 1.65rem;">Editar Animal</h1>
+        <p class="text-subtitle mt-1">Completa el formulario con los datos del animal</p>
+      </section>
+
+      <!-- Formulario de Edición Pre-Cargado (Fiel a Stitch) -->
+      <form class="form-sheet-card" id="editarAnimalForm" onsubmit="handleEditAnimal(event)">
+        
+        <!-- Fila 1: Nombre y Raza -->
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="editNombre">Nombre</label>
+            <input type="text" id="editNombre" class="form-control" value="Larry" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="editRaza">Raza</label>
+            <input type="text" id="editRaza" class="form-control" value="Mestizos" required>
+          </div>
+        </div>
+
+        <!-- Fila 2: Edad y Tipo de Animal -->
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="editEdad">Edad Aprox</label>
+            <input type="text" id="editEdad" class="form-control" value="2" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="editTipo">Tipo animal</label>
+            <select id="editTipo" class="form-control" required style="appearance: auto;">
+              <option value="perro" selected>Perro</option>
+              <option value="gato">Gato</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Fila 3: Subir Foto y Estado -->
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label">Subir Foto</label>
+            <div class="input-wrapper has-right-icon">
+              <input type="text" class="form-control" value="foto_larry.jpg" readonly style="background-color: #f8fafc; cursor: pointer;">
+              <span class="input-icon-right" style="pointer-events: none;">📤</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="editEstado">Estado</label>
+            <select id="editEstado" class="form-control" required style="appearance: auto;">
+              <option value="disponible" selected>Disponible</option>
+              <option value="tratamiento">En tratamiento</option>
+              <option value="acogida">Acogida</option>
+              <option value="urgente">Urgente</option>
+              <option value="adoptado">Adoptado</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="editDesc">Descripcion</label>
+          <textarea id="editDesc" rows="3" class="form-control" style="resize: vertical; font-size: 0.95rem;">Muy juguetón, muy hiperactivo, así que se requiere un patio.</textarea>
+        </div>
+
+        <!-- Estado de Salud -->
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="editSalud">Estado de salud</label>
+          <input type="text" id="editSalud" class="form-control" value="Sano. Vacunado y desparasitado" required>
+        </div>
+
+        <!-- Botones de Acción (2 columnas: Guardar y Cancelar) -->
+        <div class="grid-2 mt-2">
+          <button type="submit" class="btn btn-primary btn-block">
+            Guardar
+          </button>
+          <a href="detalle_animal.html" class="btn btn-secondary btn-block">
+            Cancelar
+          </a>
+        </div>
+
+      </form>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de voluntario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS CONECTADAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal Voluntario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span class="badge" style="background-color: #fff1ec; color: #df7054; font-size: 0.75rem;">3 hoy</span>
+        </a>
+        <a href="nuestros_animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    function handleEditAnimal(e) {
+      e.preventDefault();
+      alert('¡Datos de Larry actualizados correctamente!');
+      window.location.href = 'detalle_animal.html';
+    }
+  </script>
+</body>
+</html>
+

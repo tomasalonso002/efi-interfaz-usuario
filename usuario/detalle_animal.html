@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de Toby - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Estilos del Carrusel */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background-color: var(--bg-surface-subtle);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .carousel-slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-circle);
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: var(--text-main);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+      z-index: 5;
+    }
+
+    .carousel-nav-btn:hover {
+      background-color: #ffffff;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-nav-btn--prev { left: var(--space-3); }
+    .carousel-nav-btn--next { right: var(--space-3); }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: var(--space-3);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-circle);
+      background-color: rgba(255, 255, 255, 0.6);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .carousel-dot.is-active {
+      width: 22px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-primary);
+    }
+
+    /* Tarjetas de Métricas de Animal */
+    .metric-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .metric-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      background-color: #fef2ee;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .quote-box {
+      background-color: #fdfaf6;
+      border: 1px solid #f6ece0;
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text-body);
+      margin-top: var(--space-2);
+    }
+
+    /* Layout responsive en Desktop */
+    @media (min-width: 900px) {
+      .animal-detail-layout {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: var(--space-8);
+        align-items: start;
+      }
+    }
+
+    /* Modal Formulario */
+    .modal-sheet {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-5);
+      box-shadow: var(--shadow-modal);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Éxito animado */
+    .success-celebration-badge {
+      width: 88px;
+      height: 88px;
+      border-radius: var(--radius-circle);
+      background-color: #eafaf1;
+      border: 4px solid #bbf7d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.75rem;
+      color: var(--color-success);
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .confetti-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-circle);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="animales.html" class="btn-icon" aria-label="Volver al catálogo" title="Volver al catálogo">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge d-mobile-none">
+          <span class="brand-paw">🐾</span>
+          <span>PATITAS</span>
+        </div>
+      </div>
+
+      <div class="brand-badge d-desktop-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--user">User</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Layout Responsivo (1 col en mobile, 2 col en desktop) -->
+      <div class="animal-detail-layout">
+
+        <!-- Columna Izquierda: Galería y Fotos -->
+        <div class="d-flex flex-column gap-4">
+          
+          <!-- Encabezado Móvil de Título -->
+          <div class="d-flex justify-between align-start">
+            <div>
+              <span class="badge" style="background-color: #fef1ec; color: #df7054; text-transform: uppercase; font-size: 0.75rem;">
+                En Adopción
+              </span>
+              <h1 class="title-hero mt-1" style="font-size: 1.85rem;" id="animalTitle">Detalles de Toby</h1>
+            </div>
+            <button class="btn-icon btn-favorite-standalone" aria-label="Guardar en favoritos" onclick="toggleFav(this)" style="color: #ef4444; font-size: 1.25rem;">
+              ❤️
+            </button>
+          </div>
+
+          <!-- Carrusel de Fotos Interactivo -->
+          <div class="carousel-container" aria-label="Fotos de Toby">
+            <div class="carousel-slides" id="carouselTrack">
+              <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="Toby sentado alegremente en el patio del refugio">
+              </div>
+              <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Toby jugando al aire libre en el parque">
+              </div>
+            </div>
+
+            <button class="carousel-nav-btn carousel-nav-btn--prev" aria-label="Foto anterior" onclick="moveSlide(-1)">
+              ‹
+            </button>
+            <button class="carousel-nav-btn carousel-nav-btn--next" aria-label="Siguiente foto" onclick="moveSlide(1)">
+              ›
+            </button>
+
+            <div class="carousel-dots" id="carouselDots">
+              <span class="carousel-dot is-active" onclick="setSlide(0)"></span>
+              <span class="carousel-dot" onclick="setSlide(1)"></span>
+            </div>
+          </div>
+
+          <!-- Ficha de Métricas (2 columnas) -->
+          <div class="grid-2">
+            <div class="metric-card">
+              <div class="metric-icon-box" aria-hidden="true">⏱️</div>
+              <div>
+                <span class="text-caption text-muted text-uppercase text-bold">EDAD</span>
+                <p class="text-bold text-main" style="font-size: 1rem; margin-top: 2px;">2 años aprox</p>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-box" aria-hidden="true">📐</div>
+              <div>
+                <span class="text-caption text-muted text-uppercase text-bold">TAMAÑO</span>
+                <p class="text-bold text-main" style="font-size: 1rem; margin-top: 2px;">Grande</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha: Salud, Personalidad y Acción -->
+        <div class="d-flex flex-column gap-4">
+
+          <!-- Tarjeta Estado de Salud -->
+          <article class="card">
+            <div class="d-flex align-center gap-3">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #eafaf1; color: var(--color-success); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                ✓
+              </div>
+              <div class="flex-1">
+                <div class="d-flex align-center gap-2">
+                  <h2 class="title-card" style="font-size: 1.05rem;">Estado de salud</h2>
+                  <span class="badge badge-success">Sano</span>
+                </div>
+                <p class="text-caption text-muted mt-1">Vacunado y desparasitado</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Tarjeta Personalidad y Requisitos -->
+          <article class="card">
+            <div class="d-flex align-center gap-2 mb-2">
+              <span class="text-primary" style="font-size: 1.1rem;">ℹ️</span>
+              <h2 class="form-label" style="margin: 0; font-size: 0.85rem;">PERSONALIDAD Y REQUISITOS</h2>
+            </div>
+            <div class="quote-box">
+              <p>Muy juguetón, muy hiperactivo, así que se requiere un patio.</p>
+            </div>
+          </article>
+
+          <!-- Botón Primario de Alta Jerarquía: Solicitar Adopción -->
+          <div class="mt-2">
+            <button class="btn btn-primary btn-block btn-lg" onclick="openAdoptionModal()" style="font-size: 1.1rem; box-shadow: 0 8px 24px rgba(223, 112, 84, 0.4);">
+              <span>❤️</span>
+              <span>Solicitar Adopción</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL 1: FORMULARIO DE SOLICITUD DE ADOPCIÓN (Fiel a stitch/usuario/solicitud_adopcion.png) -->
+  <div class="modal-overlay" id="modalAdoptionForm" onclick="if(event.target === this) closeModals()">
+    <div class="modal-sheet" role="dialog" aria-labelledby="modalAdoptionTitle">
+      <button class="modal-close-btn" aria-label="Cerrar ventana" onclick="closeModals()">✕</button>
+
+      <div>
+        <span class="badge badge-warning">
+          <span class="badge-dot"></span> Proceso de adopción
+        </span>
+        <h2 id="modalAdoptionTitle" class="title-card mt-2" style="font-size: 1.35rem;">
+          Solicitud de adopcion de ‘Toby’
+        </h2>
+        <p class="text-subtitle mt-2" style="font-size: 0.9rem;">
+          Cuéntanos un poco sobre ti y por qué deseas adoptar a Toby. Esta información ayuda al equipo del refugio a encontrar la mejor combinación.
+        </p>
+      </div>
+
+      <form onsubmit="handleAdoptionSubmit(event)" class="d-flex flex-column gap-3">
+        <div class="form-group" style="margin: 0;">
+          <div class="d-flex justify-between align-center mb-1">
+            <label class="form-label" for="adoptionMessage" style="margin: 0;">Tu mensaje</label>
+            <span class="text-caption text-muted">Requerido</span>
+          </div>
+          <textarea 
+            id="adoptionMessage" 
+            rows="4" 
+            class="form-control" 
+            placeholder="Escribe tu mensaje aquí..." 
+            required 
+            style="resize: none; font-size: 0.95rem; border-radius: var(--radius-md);"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">
+          <span>Enviar Solicitud</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CONFIRMACIÓN DE ÉXITO (Fiel a stitch/usuario/solicitud_enviada.png) -->
+  <div class="modal-overlay" id="modalAdoptionSuccess" onclick="if(event.target === this) closeModals()">
+    <div class="modal-sheet text-center" style="align-items: center;" role="dialog" aria-labelledby="modalSuccessTitle">
+      
+      <div class="success-celebration-badge" aria-hidden="true">
+        ✓
+        <span class="confetti-dot" style="top: -2px; right: 2px; background: #df7054;"></span>
+        <span class="confetti-dot" style="bottom: 8px; left: -4px; background: #f59e0b;"></span>
+      </div>
+
+      <h2 id="modalSuccessTitle" class="title-card mt-2" style="font-size: 1.45rem; line-height: 1.25;">
+        ¡Solicitud Enviada con éxito!
+      </h2>
+
+      <p class="text-subtitle" style="font-size: 0.95rem;">
+        El equipo del refugio revisará tu postulación y te notificará el estado en la sección <strong>Mis Solicitudes</strong>.
+      </p>
+
+      <div class="d-flex flex-column gap-2 btn-block mt-3">
+        <a href="mis_solicitudes_adopcion.html" class="btn btn-primary btn-block">
+          Ver Mis Solicitudes
+        </a>
+        <a href="inicio.html" class="btn btn-secondary btn-block">
+          Volver al Inicio
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú principal de usuario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal de Usuario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-light); margin-top: var(--space-2);"></div>
+
+      <nav class="d-flex flex-column gap-2" aria-label="Accesos directos">
+        <span class="text-caption text-muted text-uppercase text-bold" style="letter-spacing: 0.06em; margin-bottom: 4px;">
+          Menú Principal
+        </span>
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>🏠</span>
+            <span>Inicio</span>
+          </div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left">
+            <span>❤️</span>
+            <span>Adoptar Mascotas</span>
+          </div>
+          <span>›</span>
+        </a>
+        <a href="mis_solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>📄</span>
+            <span>Mis Solicitudes</span>
+          </div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="callout-box mt-3">
+        <span style="font-size: 1.25rem;">🛡️</span>
+        <p>¡Cada adopción transforma dos vidas! Consulta el estado de tus solicitudes en cualquier momento.</p>
+      </div>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+        <p class="text-center text-caption text-muted">Patitas Conectadas • v1.2</p>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    // Carrusel interactivo
+    let currentSlide = 0;
+    const totalSlides = 2;
+
+    function moveSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function setSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const track = document.getElementById('carouselTrack');
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('is-active', idx === currentSlide);
+      });
+    }
+
+    function toggleFav(btn) {
+      const isFav = btn.textContent.trim() === '❤️';
+      btn.textContent = isFav ? '🤍' : '❤️';
+      btn.style.transform = 'scale(1.25)';
+      setTimeout(() => btn.style.transform = '', 200);
+    }
+
+    // Manejo de Modales
+    function openAdoptionModal() {
+      document.getElementById('modalAdoptionForm').classList.add('is-active');
+    }
+
+    function closeModals() {
+      document.getElementById('modalAdoptionForm').classList.remove('is-active');
+      document.getElementById('modalAdoptionSuccess').classList.remove('is-active');
+    }
+
+    function handleAdoptionSubmit(e) {
+      e.preventDefault();
+      document.getElementById('modalAdoptionForm').classList.remove('is-active');
+      document.getElementById('modalAdoptionSuccess').classList.add('is-active');
+    }
+  </script>
+</body>
+</html>
+

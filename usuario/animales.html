@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestros Animales en Adopción - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header común de Usuario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge">
+          <span class="brand-paw">🐾</span>
+          <span>PATITAS</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de usuario">
+        <a href="inicio.html" class="header-nav-link">Inicio</a>
+        <a href="animales.html" class="header-nav-link is-active">Adoptar Mascotas</a>
+        <a href="mis_solicitudes_adopcion.html" class="header-nav-link">Mis Solicitudes</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--user">User</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+      
+      <!-- Encabezado de la Sección con Ley de Gestalt -->
+      <section aria-labelledby="heading-catalogo">
+        <div class="d-flex flex-column gap-1">
+          <h1 id="heading-catalogo" class="title-section" style="font-size: 1.45rem;">Nuestros animales</h1>
+          <p class="text-subtitle">
+            Conoce a quienes buscan un hogar responsable y amoroso
+          </p>
+        </div>
+
+        <!-- Chips de Filtrado Interactivo (Todos, Perros, Gatos) -->
+        <div class="filter-tabs mt-4" role="tablist" aria-label="Filtro de animales por especie">
+          <button class="filter-chip is-active" id="filter-all" role="tab" aria-selected="true" onclick="filterAnimals('all', this)">
+            ✨ Todos
+          </button>
+          <button class="filter-chip" id="filter-perros" role="tab" aria-selected="false" onclick="filterAnimals('perro', this)">
+            🐶 Perros
+          </button>
+          <button class="filter-chip" id="filter-gatos" role="tab" aria-selected="false" onclick="filterAnimals('gato', this)">
+            🐱 Gatos
+          </button>
+        </div>
+      </section>
+
+      <!-- Catálogo de Animales Adaptable (1 col móvil, 2 col tablet, 3-4 col desktop) -->
+      <section class="grid-responsive-3" id="animalsGrid" aria-label="Lista de animales disponibles">
+        
+        <!-- Animal 1: Milo -->
+        <article class="animal-card" data-species="perro">
+          <div class="animal-card__media">
+            <span class="badge badge-success badge-floating">
+              <span class="badge-dot"></span> Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Milo, perro mestizo tamaño mediano de 2 años">
+            <button class="btn-favorite" aria-label="Milo guardado en favoritos" aria-pressed="true" onclick="toggleFav(this)">
+              ❤️
+            </button>
+          </div>
+          <div class="animal-card__body">
+            <div class="animal-card__header">
+              <h2 class="animal-card__name">MILO</h2>
+              <span class="badge-trait">Cariñoso</span>
+            </div>
+            <p class="animal-card__meta">Macho • 2 años • Mediano</p>
+            <a href="detalle_animal.html?name=Milo" class="btn btn-secondary btn-block mt-2">
+              VER DETALLES →
+            </a>
+          </div>
+        </article>
+
+        <!-- Animal 2: Luna -->
+        <article class="animal-card" data-species="gato">
+          <div class="animal-card__media">
+            <span class="badge badge-success badge-floating">
+              <span class="badge-dot"></span> Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Luna, gatita atigrada de 8 meses">
+            <button class="btn-favorite" aria-label="Guardar a Luna en favoritos" aria-pressed="false" onclick="toggleFav(this)">
+              🤍
+            </button>
+          </div>
+          <div class="animal-card__body">
+            <div class="animal-card__header">
+              <h2 class="animal-card__name">LUNA</h2>
+              <span class="badge-trait">Juguetona</span>
+            </div>
+            <p class="animal-card__meta">Hembra • 8 meses • Tranquila</p>
+            <a href="detalle_animal.html?name=Luna" class="btn btn-secondary btn-block mt-2">
+              VER DETALLES →
+            </a>
+          </div>
+        </article>
+
+        <!-- Animal 3: Rocky -->
+        <article class="animal-card" data-species="perro">
+          <div class="animal-card__media">
+            <span class="badge badge-success badge-floating">
+              <span class="badge-dot"></span> Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80" alt="Rocky, perro dorado sociable de 1 año">
+            <button class="btn-favorite" aria-label="Guardar a Rocky en favoritos" aria-pressed="false" onclick="toggleFav(this)">
+              🤍
+            </button>
+          </div>
+          <div class="animal-card__body">
+            <div class="animal-card__header">
+              <h2 class="animal-card__name">ROCKY</h2>
+              <span class="badge-trait">Protector</span>
+            </div>
+            <p class="animal-card__meta">Macho • 1 año • Sociable</p>
+            <a href="detalle_animal.html?name=Rocky" class="btn btn-secondary btn-block mt-2">
+              VER DETALLES →
+            </a>
+          </div>
+        </article>
+
+        <!-- Animal 4: Toby (Ficha estrella de Stitch) -->
+        <article class="animal-card" data-species="perro">
+          <div class="animal-card__media">
+            <span class="badge badge-success badge-floating">
+              <span class="badge-dot"></span> Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Toby, perro mestizo grande de 2 años listo para adopción">
+            <button class="btn-favorite" aria-label="Toby guardado en favoritos" aria-pressed="true" onclick="toggleFav(this)">
+              ❤️
+            </button>
+          </div>
+          <div class="animal-card__body">
+            <div class="animal-card__header">
+              <h2 class="animal-card__name">TOBY</h2>
+              <span class="badge-trait">Hiperactivo</span>
+            </div>
+            <p class="animal-card__meta">Macho • 2 años • Grande</p>
+            <a href="detalle_animal.html?name=Toby" class="btn btn-secondary btn-block mt-2">
+              VER DETALLES →
+            </a>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #16a34a;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral Desplegable -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú principal de usuario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal de Usuario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-light); margin-top: var(--space-2);"></div>
+
+      <nav class="d-flex flex-column gap-2" aria-label="Accesos directos">
+        <span class="text-caption text-muted text-uppercase text-bold" style="letter-spacing: 0.06em; margin-bottom: 4px;">
+          Menú Principal
+        </span>
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>🏠</span>
+            <span>Inicio</span>
+          </div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left">
+            <span>❤️</span>
+            <span>Adoptar Mascotas</span>
+          </div>
+          <span>›</span>
+        </a>
+        <a href="mis_solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>📄</span>
+            <span>Mis Solicitudes</span>
+          </div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="callout-box mt-3">
+        <span style="font-size: 1.25rem;">🛡️</span>
+        <p>¡Cada adopción transforma dos vidas! Consulta el estado de tus solicitudes en cualquier momento.</p>
+      </div>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+        <p class="text-center text-caption text-muted">Patitas Conectadas • v1.2</p>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    function toggleFav(btn) {
+      const isFav = btn.textContent.trim() === '❤️';
+      if (isFav) {
+        btn.textContent = '🤍';
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        btn.textContent = '❤️';
+        btn.setAttribute('aria-pressed', 'true');
+      }
+      btn.style.transform = 'scale(1.2)';
+      setTimeout(() => btn.style.transform = '', 200);
+    }
+
+    // Filtro interactivo de animales
+    function filterAnimals(species, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.classList.remove('is-active');
+        c.setAttribute('aria-selected', 'false');
+      });
+      chip.classList.add('is-active');
+      chip.setAttribute('aria-selected', 'true');
+
+      const cards = document.querySelectorAll('.animal-card');
+      cards.forEach(card => {
+        if (species === 'all' || card.getAttribute('data-species') === species) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

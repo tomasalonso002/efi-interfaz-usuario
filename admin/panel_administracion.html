@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    @media (min-width: 768px) {
+      .stats-grid-dashboard {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+      }
+    }
+    @media (min-width: 1040px) {
+      .stats-grid-dashboard {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge d-mobile-none">
+          <span class="brand-paw">🐾</span>
+          <span>Patitas Conectadas</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de administración">
+        <a href="inicio.html" class="header-nav-link">Inicio</a>
+        <a href="panel_administracion.html" class="header-nav-link is-active">Resumen</a>
+        <a href="animales.html" class="header-nav-link">Animales</a>
+        <a href="voluntarios.html" class="header-nav-link">Voluntarios</a>
+        <a href="solicitudes_adopcion.html" class="header-nav-link">Adopciones</a>
+        <a href="tareas.html" class="header-nav-link">Tareas</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">
+          👤 Admin
+        </span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Encabezado de la Sección -->
+      <section class="mb-3">
+        <h1 class="title-hero" style="font-size: 1.65rem;">Panel de Administración</h1>
+        <p class="text-subtitle mt-1 d-flex align-center gap-2">
+          <span style="color: #16a34a; font-size: 0.8rem;">●</span>
+          <span>Resumen operativo en tiempo real</span>
+        </p>
+      </section>
+
+      <!-- Grilla de Estadísticas (Fiel a stitch/admin/panel_administracion.png) -->
+      <section class="stats-grid-dashboard d-flex flex-column gap-3" aria-label="Métricas del refugio">
+        
+        <!-- Métrica 1: Animales en refugio -->
+        <article class="stat-card">
+          <div class="stat-card__icon-box" aria-hidden="true" style="background-color: #fff4ed; color: #df7054;">
+            🏠
+          </div>
+          <div class="stat-card__info">
+            <h2 class="stat-card__title">Animales en refugio:</h2>
+            <p class="stat-card__subtitle">Capacidad total 20</p>
+          </div>
+          <div class="stat-card__value">15</div>
+        </article>
+
+        <!-- Métrica 2: Animales disponibles (Destacada con borde coral) -->
+        <article class="stat-card stat-card--accent-primary">
+          <div class="stat-card__icon-box" aria-hidden="true">
+            🐾
+          </div>
+          <div class="stat-card__info">
+            <h2 class="stat-card__title">Animales disponibles para adoptar:</h2>
+            <div class="mt-1">
+              <span class="badge badge-success" style="font-size: 0.72rem; padding: 2px 8px;">
+                Listos para hogar
+              </span>
+            </div>
+          </div>
+          <div class="stat-card__value stat-card__value--primary">12</div>
+        </article>
+
+        <!-- Métrica 3: Solicitudes pendientes -->
+        <article class="stat-card" style="border-left: 5px solid #f59e0b;">
+          <div class="stat-card__icon-box" aria-hidden="true" style="background-color: #fefce8; color: #d97706;">
+            📄
+          </div>
+          <div class="stat-card__info">
+            <h2 class="stat-card__title">Solicitudes pendientes:</h2>
+            <p class="stat-card__subtitle text-warning text-bold">● Requiere revisión</p>
+          </div>
+          <div class="stat-card__value" style="color: #d97706;">1</div>
+        </article>
+
+        <!-- Métrica 4: Voluntarios activos -->
+        <article class="stat-card" style="border-left: 5px solid #0d9488;">
+          <div class="stat-card__icon-box" aria-hidden="true" style="background-color: #f0fdfa; color: #0d9488;">
+            👥
+          </div>
+          <div class="stat-card__info">
+            <h2 class="stat-card__title">Voluntarios activos:</h2>
+            <p class="stat-card__subtitle">En turno hoy</p>
+          </div>
+          <div class="stat-card__value">6</div>
+        </article>
+
+      </section>
+
+      <!-- Accesos Rápidos de Gestión -->
+      <section class="mt-4 pt-3" style="border-top: 1px solid var(--border-light);">
+        <h2 class="form-label mb-3" style="font-size: 0.85rem;">ACCIONES RÁPIDAS DE CONTROL</h2>
+        <div class="grid-2">
+          <a href="nuevo_animal.html" class="btn btn-primary btn-block">
+            <span>+</span>
+            <span>Nuevo Animal</span>
+          </a>
+          <a href="nuevo_voluntario.html" class="btn btn-secondary btn-block">
+            <span>+</span>
+            <span>Nuevo Voluntario</span>
+          </a>
+          <a href="crear_tarea.html" class="btn btn-secondary btn-block">
+            <span>+</span>
+            <span>Crear Tarea</span>
+          </a>
+          <a href="solicitudes_adopcion.html" class="btn btn-secondary btn-block">
+            <span>❤️</span>
+            <span>Revisar Adopciones</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados • Patitas Admin</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>›</span>
+        </a>
+        <a href="voluntarios.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>👥</span><span>Voluntarios</span></div>
+          <span>›</span>
+        </a>
+        <a href="solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>❤️</span><span>Adopciones</span></div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>›</span>
+        </a>
+        <a href="panel_administracion.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>📊</span><span>Resumen</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

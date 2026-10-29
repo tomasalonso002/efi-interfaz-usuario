@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarme - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .register-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: var(--space-4);
+      gap: var(--space-3);
+    }
+
+    .icon-badge-coral {
+      width: 76px;
+      height: 76px;
+      background: linear-gradient(135deg, #f28b72, #df7054);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 2.25rem;
+      box-shadow: 0 10px 25px -4px rgba(223, 112, 84, 0.4);
+      margin-bottom: var(--space-1);
+    }
+
+    .register-title {
+      font-size: 1.65rem;
+      font-weight: var(--font-weight-extrabold);
+      color: #0f283d; /* Dark navy de Stitch */
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .register-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .register-form {
+      width: 100%;
+      margin-top: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    /* Ajuste de formulario compacto */
+    .register-form .form-group {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell app-shell--auth">
+    
+    <!-- Barra superior de navegación / volver -->
+    <header class="app-header" style="justify-content: flex-start;">
+      <a href="inicio.html" class="btn-icon" aria-label="Volver al inicio" title="Volver al inicio">
+        ‹
+      </a>
+    </header>
+
+    <main class="app-main" id="main-content">
+      
+      <section class="register-container">
+        
+        <!-- Ícono Coral/Terracota de Patita -->
+        <div class="icon-badge-coral" aria-hidden="true">
+          🐾
+        </div>
+
+        <div>
+          <h1 class="register-title">PATITAS CONECTADAS</h1>
+          <p class="register-subtitle mt-1">Crea tu cuenta de adoptante</p>
+        </div>
+
+        <!-- Formulario con campos de Stitch y validación accesible -->
+        <form class="register-form" id="registerForm" novalidate onsubmit="handleRegister(event)">
+          
+          <!-- Fila 1: Nombre y Apellido -->
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="regNombre">Nombre</label>
+              <input 
+                type="text" 
+                id="regNombre" 
+                name="nombre" 
+                class="form-control" 
+                placeholder="Ej. Ana" 
+                autocomplete="given-name"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regApellido">Apellido</label>
+              <input 
+                type="text" 
+                id="regApellido" 
+                name="apellido" 
+                class="form-control" 
+                placeholder="Ej. Gómez" 
+                autocomplete="family-name"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Fila 2: DNI y Teléfono -->
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="regDni">DNI</label>
+              <input 
+                type="text" 
+                id="regDni" 
+                name="dni" 
+                class="form-control" 
+                placeholder="N° de Documento" 
+                inputmode="numeric"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regTelefono">Teléfono</label>
+              <input 
+                type="tel" 
+                id="regTelefono" 
+                name="telefono" 
+                class="form-control" 
+                placeholder="+54 9..." 
+                autocomplete="tel"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Campo Gmail / Correo -->
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Gmail</label>
+            <div class="input-wrapper">
+              <span class="input-icon-left" aria-hidden="true">@</span>
+              <input 
+                type="email" 
+                id="regEmail" 
+                name="email" 
+                class="form-control" 
+                placeholder="ejemplo@gmail.com" 
+                autocomplete="email"
+                required
+                oninput="validateEmailField(this)"
+              >
+            </div>
+            <span class="form-feedback is-error" id="regEmailError" style="display: none;">
+              Por favor ingresa un correo válido.
+            </span>
+          </div>
+
+          <!-- Campo Contraseña -->
+          <div class="form-group">
+            <label class="form-label" for="regPass">Contraseña</label>
+            <div class="input-wrapper has-right-icon">
+              <input 
+                type="password" 
+                id="regPass" 
+                name="password" 
+                class="form-control" 
+                placeholder="••••••••" 
+                autocomplete="new-password"
+                required
+                oninput="validatePasswordStrength(this)"
+              >
+              <button 
+                type="button" 
+                class="input-icon-right" 
+                aria-label="Mostrar contraseña"
+                onclick="togglePassVisibility('regPass', this)"
+                style="background:none; border:none;"
+              >
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <!-- Campo Confirmar Contraseña -->
+          <div class="form-group">
+            <label class="form-label" for="regConfirmPass">Confirmar Contraseña</label>
+            <div class="input-wrapper has-right-icon">
+              <input 
+                type="password" 
+                id="regConfirmPass" 
+                name="confirm_password" 
+                class="form-control" 
+                placeholder="••••••••" 
+                autocomplete="new-password"
+                required
+                oninput="validatePasswordMatch()"
+              >
+              <button 
+                type="button" 
+                class="input-icon-right" 
+                aria-label="Mostrar confirmación de contraseña"
+                onclick="togglePassVisibility('regConfirmPass', this)"
+                style="background:none; border:none;"
+              >
+                👁️
+              </button>
+            </div>
+            <span class="form-feedback is-error" id="regPassMatchError" style="display: none;">
+              Las contraseñas no coinciden.
+            </span>
+          </div>
+
+          <!-- Botón Dark / Carbón de Stitch -->
+          <button type="submit" class="btn btn-dark btn-block btn-lg mt-3">
+            <span>Crear cuenta</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <!-- Enlace para volver a Iniciar Sesión -->
+          <div class="text-center mt-2">
+            <p class="text-caption">
+              ¿Ya tienes una cuenta? <a href="iniciar_sesion.html" class="text-primary text-bold" style="text-decoration: underline;">Inicia sesión aquí</a>
+            </p>
+          </div>
+
+        </form>
+
+      </section>
+
+    </main>
+
+    <!-- Footer común de Stitch -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function togglePassVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.setAttribute('aria-label', 'Ocultar contraseña');
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+        btn.setAttribute('aria-label', 'Mostrar contraseña');
+      }
+    }
+
+    function validateEmailField(input) {
+      const error = document.getElementById('regEmailError');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(input.value.trim()) && input.value.trim().length > 0) {
+        input.classList.add('is-invalid');
+        error.style.display = 'block';
+        return false;
+      } else {
+        input.classList.remove('is-invalid');
+        error.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePasswordMatch() {
+      const p1 = document.getElementById('regPass').value;
+      const p2 = document.getElementById('regConfirmPass');
+      const err = document.getElementById('regPassMatchError');
+
+      if (p2.value.length > 0 && p1 !== p2.value) {
+        p2.classList.add('is-invalid');
+        err.style.display = 'block';
+        return false;
+      } else {
+        p2.classList.remove('is-invalid');
+        err.style.display = 'none';
+        return true;
+      }
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+      const form = document.getElementById('registerForm');
+      if (form.checkValidity() && validatePasswordMatch()) {
+        alert('¡Cuenta de adoptante creada exitosamente! Bienvenido a Patitas Conectadas.');
+        window.location.href = '../usuario/inicio.html';
+      } else {
+        alert('Por favor verifica los campos obligatorios del formulario.');
+      }
+    }
+  </script>
+</body>
+</html>
+

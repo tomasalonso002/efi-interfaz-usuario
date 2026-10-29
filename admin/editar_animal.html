@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Animal - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .admin-form-sheet {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="detalle_animal.html" class="btn-icon" aria-label="Volver a detalle" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="mb-2 text-center text-md-left" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <h1 class="title-hero" style="font-size: 1.65rem;">Editar Animal</h1>
+        <p class="text-subtitle mt-1">Modifica los datos del registro en el refugio</p>
+      </section>
+
+      <!-- Formulario de Edición -->
+      <form class="admin-form-sheet" id="adminEditAnimalForm" onsubmit="handleAdminEdit(event)">
+        
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEditNombre">Nombre</label>
+            <input type="text" id="admEditNombre" class="form-control" value="Larry" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEditRaza">Raza</label>
+            <input type="text" id="admEditRaza" class="form-control" value="Mestizos" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEditEdad">Edad Aprox</label>
+            <input type="text" id="admEditEdad" class="form-control" value="2" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEditTipo">Tipo animal</label>
+            <select id="admEditTipo" class="form-control" required style="appearance: auto;">
+              <option value="perro" selected>Perro</option>
+              <option value="gato">Gato</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label">Subir Foto</label>
+            <input type="text" class="form-control" value="foto_larry.jpg" readonly style="background-color: #f8fafc;">
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEditEstado">Estado</label>
+            <select id="admEditEstado" class="form-control" required style="appearance: auto;">
+              <option value="disponible" selected>Disponible</option>
+              <option value="tratamiento">En tratamiento</option>
+              <option value="acogida">Acogida</option>
+              <option value="urgente">Urgente</option>
+              <option value="adoptado">Adoptado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="admEditDesc">Descripcion</label>
+          <textarea id="admEditDesc" rows="3" class="form-control">Muy juguetón, muy hiperactivo, así que se requiere un patio.</textarea>
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="admEditSalud">Estado de salud</label>
+          <input type="text" id="admEditSalud" class="form-control" value="Sano. Vacunado y desparasitado" required>
+        </div>
+
+        <div class="grid-2 mt-2">
+          <button type="submit" class="btn btn-primary btn-block">
+            Guardar Cambios
+          </button>
+          <a href="detalle_animal.html" class="btn btn-secondary btn-block">
+            Cancelar
+          </a>
+        </div>
+
+      </form>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+    function handleAdminEdit(e) {
+      e.preventDefault();
+      alert('¡Registro de Larry actualizado por administración!');
+      window.location.href = 'detalle_animal.html';
+    }
+  </script>
+</body>
+</html>
+

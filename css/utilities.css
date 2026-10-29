@@ -1,0 +1,224 @@
+/**
+ * PATITAS CONECTADAS - UTILIDADES CSS
+ * Clases de apoyo para espaciado, layout, tipografía y Gestalt
+ */
+
+/* ==========================================================================
+   1. DISPLAY & FLEXBOX
+   ========================================================================== */
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+.d-block { display: block; }
+.d-none { display: none; }
+
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+
+/* ==========================================================================
+   2. GAPS & ESPACIADOS (LEY DE PROXIMIDAD DE GESTALT)
+   ========================================================================== */
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-5 { gap: var(--space-5); }
+.gap-6 { gap: var(--space-6); }
+
+.m-0 { margin: 0; }
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
+.mt-6 { margin-top: var(--space-6); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-5 { margin-bottom: var(--space-5); }
+.mb-6 { margin-bottom: var(--space-6); }
+
+.p-0 { padding: 0; }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+
+/* ==========================================================================
+   3. TIPOGRAFÍA & JERARQUÍA VISUAL (especioficaciones.md - Sección 3)
+   ========================================================================== */
+.title-hero {
+  font-size: var(--h1-size);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.title-section {
+  font-size: var(--h2-size);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.title-section::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.title-card {
+  font-size: var(--h3-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-main);
+}
+
+.text-subtitle {
+  font-size: var(--body-sm-size);
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.text-caption {
+  font-size: var(--caption-size);
+  color: var(--text-muted);
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-bold { font-weight: var(--font-weight-bold); }
+.text-semibold { font-weight: var(--font-weight-semibold); }
+.text-medium { font-weight: var(--font-weight-medium); }
+
+.text-primary { color: var(--color-primary); }
+.text-success { color: var(--color-success); }
+.text-danger { color: var(--color-danger); }
+.text-warning { color: var(--color-warning); }
+.text-muted { color: var(--text-muted); }
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   4. GRILLAS RESPONSIVAS / GRID
+   Adaptabilidad fluida en 1, 2, 3 y 4 columnas
+   ========================================================================== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.grid-responsive-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 600px) {
+  .grid-responsive-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-responsive-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-responsive-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid-responsive-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-responsive-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Modificadores Responsive de Visibilidad y Dirección */
+@media (max-width: 767px) {
+  .d-mobile-none { display: none !important; }
+}
+
+@media (min-width: 768px) {
+  .d-desktop-none { display: none !important; }
+  .flex-md-row { flex-direction: row !important; }
+  .align-md-center { align-items: center !important; }
+}
+
+/* Divisores */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--caption-size);
+  margin: var(--space-4) 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.divider:not(:empty)::before {
+  margin-right: var(--space-3);
+}
+
+.divider:not(:empty)::after {
+  margin-left: var(--space-3);
+}
+
+/* Scroll horizontal con indicación de continuidad (Gestalt) */
+.scroll-x-peek {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  margin-right: calc(-1 * var(--space-5));
+  padding-right: var(--space-5);
+  scrollbar-width: none;
+}
+.scroll-x-peek::-webkit-scrollbar {
+  display: none;
+}
+

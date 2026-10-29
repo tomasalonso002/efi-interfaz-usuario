@@ -1,0 +1,10 @@
+/**
+ * PATITAS CONECTADAS - MAIN CSS
+ * Unifica el sistema de diseño completo
+ */
+
+@import url('variables.css');
+@import url('reset.css');
+@import url('components.css');
+@import url('utilities.css');
+

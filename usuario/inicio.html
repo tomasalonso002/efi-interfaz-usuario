@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Portal de Adoptante | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .user-hero-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      text-align: center;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .user-hero-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 26px;
+      background-color: #fdf2ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.75rem;
+      color: var(--color-primary);
+      box-shadow: 0 4px 14px rgba(223, 112, 84, 0.12);
+    }
+
+    .mission-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3vw, 2rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .mission-card p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: var(--text-body);
+      margin-bottom: var(--space-3);
+    }
+
+    .mission-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Layout responsive para desktop */
+    @media (min-width: 860px) {
+      .user-home-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+        max-width: 1040px;
+        margin: var(--space-4) auto 0;
+        align-items: start;
+      }
+      .user-hero-card,
+      .mission-card {
+        max-width: 100%;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header común de Usuario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge">
+          <span class="brand-paw">🐾</span>
+          <span>Patitas Conectadas</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de usuario">
+        <a href="inicio.html" class="header-nav-link is-active">Inicio</a>
+        <a href="animales.html" class="header-nav-link">Adoptar Mascotas</a>
+        <a href="mis_solicitudes_adopcion.html" class="header-nav-link">Mis Solicitudes</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--user" title="Rol actual: Adoptante">Usr</span>
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-sm d-mobile-none" title="Cerrar sesión">Salir</a>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <div class="user-home-grid">
+        
+        <!-- Tarjeta Hero de Acción Principal -->
+        <section class="user-hero-card" aria-label="Acción de adopción">
+          <div class="user-hero-icon" aria-hidden="true">
+            🐾
+          </div>
+          <div>
+            <h1 class="title-hero" style="font-size: 1.65rem;">PATITAS CONECTADAS</h1>
+            <p class="text-caption text-primary text-bold text-uppercase mt-1" style="letter-spacing: 0.08em;">
+              Refugio de Animales
+            </p>
+          </div>
+
+          <a href="animales.html" class="btn btn-primary btn-block btn-lg" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.4); font-size: 1.1rem;">
+            <span>Adoptar Mascotas</span>
+          </a>
+        </section>
+
+        <!-- Tarjeta "Nuestra Misión" -->
+        <article class="mission-card" aria-labelledby="title-mision">
+          <div class="d-flex align-center gap-2 mb-3">
+            <h2 id="title-mision" class="title-section" style="font-size: 1.15rem;">NUESTRA MISIÓN</h2>
+          </div>
+
+          <p>
+            En <strong>Patitas Conectadas</strong> rescatamos, rehabilitamos y brindamos un hogar seguro a animales en situación de calle y vulnerabilidad.
+          </p>
+          <p>
+            Cada historia que llega a nuestro refugio representa una segunda oportunidad de vida. Fomentamos la tenencia responsable, los cuidados médicos integrales y facilitamos un puente de amor mutuo entre cada animal y su futura familia adoptiva.
+          </p>
+          <p>
+            Unite a nuestra comunidad colaborando, transitando o adoptando un nuevo integrante que llenará tus días de alegría incondicional.
+          </p>
+
+          <div class="mt-4 pt-3" style="border-top: 1px solid var(--border-light);">
+            <a href="animales.html" class="btn btn-secondary btn-block">
+              Ver animales disponibles →
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral Desplegable (Fiel a stitch/usuario/nav.png) -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú principal de usuario">
+      
+      <!-- Encabezado del Menú -->
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal de Usuario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-light); margin-top: var(--space-2);"></div>
+
+      <!-- Links del Menú -->
+      <nav class="d-flex flex-column gap-2" aria-label="Accesos directos">
+        <span class="text-caption text-muted text-uppercase text-bold" style="letter-spacing: 0.06em; margin-bottom: 4px;">
+          Menú Principal
+        </span>
+
+        <a href="inicio.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left">
+            <span>🏠</span>
+            <span>Inicio</span>
+          </div>
+          <span>›</span>
+        </a>
+
+        <a href="animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>❤️</span>
+            <span>Adoptar Mascotas</span>
+          </div>
+          <span>›</span>
+        </a>
+
+        <a href="mis_solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left">
+            <span>📄</span>
+            <span>Mis Solicitudes</span>
+          </div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <!-- Banner Informativo Cálido -->
+      <div class="callout-box mt-3">
+        <span style="font-size: 1.25rem;">🛡️</span>
+        <p>
+          ¡Cada adopción transforma dos vidas! Consulta el estado de tus solicitudes en cualquier momento.
+        </p>
+      </div>
+
+      <!-- Cerrar Sesión inferior -->
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+        <p class="text-center text-caption text-muted">Patitas Conectadas • v1.2</p>
+      </div>
+
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      const drawer = document.getElementById('drawerBackdrop');
+      drawer.classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

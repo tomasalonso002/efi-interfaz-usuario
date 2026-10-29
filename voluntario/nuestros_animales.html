@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Animales - Portal Voluntario | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .vol-animal-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-light);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: var(--space-4);
+      align-items: center;
+      transition: all var(--transition-fast);
+    }
+
+    .vol-animal-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .vol-animal-thumb {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .vol-animal-media-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+
+    .vol-animal-media-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+    }
+
+    .vol-badge-floating {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      font-weight: bold;
+    }
+
+    .vol-animal-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .vol-status-check {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+
+    /* Grilla adaptable en tablet/desktop */
+    @media (min-width: 860px) {
+      .vol-animals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+        gap: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Voluntario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge">
+          <span class="brand-paw">🐾</span>
+          <span>PATITAS</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de voluntario">
+        <a href="inicio.html" class="header-nav-link">Inicio</a>
+        <a href="tareas.html" class="header-nav-link">Tareas</a>
+        <a href="nuestros_animales.html" class="header-nav-link is-active">Animales</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--vol">● Vol.</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Encabezado con Botón de Creación -->
+      <section class="d-flex justify-between align-center">
+        <div>
+          <span class="text-caption text-bold text-primary text-uppercase" style="letter-spacing: 0.05em;">
+            Gestión de Refugio
+          </span>
+          <h1 class="title-hero mt-1" style="font-size: 1.65rem;">Nuestros animales</h1>
+        </div>
+
+        <a href="nuevo_animal.html" class="btn btn-primary btn-sm" style="box-shadow: 0 4px 12px rgba(223, 112, 84, 0.35);">
+          <span>+</span>
+          <span>Nuevo Animal</span>
+        </a>
+      </section>
+
+      <!-- Lista de Animales en Gestión (Fiel a Stitch) -->
+      <section class="vol-animals-grid mt-2" aria-label="Fichas de animales del refugio">
+        
+        <!-- Animal 1: Larry -->
+        <article class="vol-animal-card">
+          <div class="vol-animal-media-wrapper">
+            <span class="badge badge-success vol-badge-floating">Disponible</span>
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" alt="Larry, perro mestizo en tratamiento">
+          </div>
+
+          <div class="vol-animal-info">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Larry</h2>
+              <span class="badge badge-warning" style="font-size: 0.72rem; padding: 2px 8px;">
+                En tratamiento
+              </span>
+            </div>
+            <p class="text-caption text-muted">Perro mestizo · 3 años aprox.</p>
+
+            <div class="vol-status-check">
+              <span class="text-success text-bold">✓ Vacunado</span>
+              <span class="text-warning text-bold">⏱️ Paseo hoy</span>
+            </div>
+
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <a href="detalle_animal.html?name=Larry" class="text-primary text-bold" style="font-size: 0.85rem; text-decoration: none;">
+                Ver ficha ›
+              </a>
+              <button class="btn btn-secondary btn-sm" style="padding: 3px 10px; font-size: 0.78rem;" onclick="alert('Nueva tarea asignada a Larry')">
+                + Tarea
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Animal 2: Milo -->
+        <article class="vol-animal-card">
+          <div class="vol-animal-media-wrapper">
+            <span class="badge badge-info vol-badge-floating">Acogida</span>
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80" alt="Milo, cachorro podenco mix">
+          </div>
+
+          <div class="vol-animal-info">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Milo</h2>
+              <span class="badge badge-success" style="font-size: 0.72rem; padding: 2px 8px;">
+                Sano
+              </span>
+            </div>
+            <p class="text-caption text-muted">Podenco mix · 8 meses</p>
+
+            <div class="vol-status-check">
+              <span class="text-success text-bold">✓ Desparasitado</span>
+              <span class="text-success text-bold">✓ Microchip</span>
+            </div>
+
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <a href="detalle_animal.html?name=Milo" class="text-primary text-bold" style="font-size: 0.85rem; text-decoration: none;">
+                Ver ficha ›
+              </a>
+              <button class="btn btn-secondary btn-sm" style="padding: 3px 10px; font-size: 0.78rem;" onclick="alert('Nueva tarea asignada a Milo')">
+                + Tarea
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Animal 3: Luna -->
+        <article class="vol-animal-card">
+          <div class="vol-animal-media-wrapper">
+            <span class="badge badge-danger vol-badge-floating">Urgente</span>
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80" alt="Luna, felina en medicación">
+          </div>
+
+          <div class="vol-animal-info">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Luna</h2>
+              <span class="badge" style="background: #fdf2f8; color: #db2777; font-size: 0.72rem; padding: 2px 8px;">
+                Medicación
+              </span>
+            </div>
+            <p class="text-caption text-muted">Común europeo · 1 año</p>
+
+            <div class="vol-status-check">
+              <span class="text-warning text-bold">⏱️ Dosis 18:00</span>
+              <span class="text-success text-bold">✓ Esterilizada</span>
+            </div>
+
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <a href="detalle_animal.html?name=Luna" class="text-primary text-bold" style="font-size: 0.85rem; text-decoration: none;">
+                Ver ficha ›
+              </a>
+              <button class="btn btn-secondary btn-sm" style="padding: 3px 10px; font-size: 0.78rem;" onclick="alert('Nueva tarea asignada a Luna')">
+                + Tarea
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de voluntario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS CONECTADAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal Voluntario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span class="badge" style="background-color: #fff1ec; color: #df7054; font-size: 0.75rem;">3 hoy</span>
+        </a>
+        <a href="nuestros_animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

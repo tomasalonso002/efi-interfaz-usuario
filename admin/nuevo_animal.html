@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo Animal - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .admin-form-sheet {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="animales.html" class="btn-icon" aria-label="Volver a lista" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="mb-2 text-center text-md-left" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <h1 class="title-hero" style="font-size: 1.65rem;">
+          Nuevo Animal <span class="text-primary">●</span>
+        </h1>
+        <p class="text-subtitle mt-1">Completa el formulario con los datos del animal para el refugio</p>
+      </section>
+
+      <!-- Formulario de Alta -->
+      <form class="admin-form-sheet" id="adminNewAnimalForm" onsubmit="handleAdminNewAnimal(event)">
+        
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admNombre">Nombre</label>
+            <input type="text" id="admNombre" class="form-control" placeholder="Ej. Max" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admRaza">Raza</label>
+            <input type="text" id="admRaza" class="form-control" placeholder="Ej. Mestizo" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEdad">Edad Aprox</label>
+            <input type="text" id="admEdad" class="form-control" placeholder="Ej. 1 año" required>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admTipo">Tipo Animal</label>
+            <select id="admTipo" class="form-control" required style="appearance: auto;">
+              <option value="" disabled selected>Selecciona tipo</option>
+              <option value="perro">Perro</option>
+              <option value="gato">Gato</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label">Subir Foto</label>
+            <input type="file" id="admFoto" class="form-control" accept="image/*">
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="admEstado">Estado</label>
+            <select id="admEstado" class="form-control" required style="appearance: auto;">
+              <option value="disponible" selected>Disponible</option>
+              <option value="tratamiento">En tratamiento</option>
+              <option value="acogida">Acogida</option>
+              <option value="urgente">Urgente</option>
+              <option value="adoptado">Adoptado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="admDesc">Descripción</label>
+          <textarea id="admDesc" rows="3" class="form-control" placeholder="Detalla la personalidad, comportamiento, compatibilidad..." required></textarea>
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="admSalud">Estado de salud</label>
+          <input type="text" id="admSalud" class="form-control" placeholder="Ej. Sano. Vacunas al día y desparasitado" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-2" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.35);">
+          <span>🐾</span>
+          <span>Cargar Animal al Sistema</span>
+        </button>
+
+      </form>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+    function handleAdminNewAnimal(e) {
+      e.preventDefault();
+      alert('¡Animal incorporado con éxito al sistema del refugio!');
+      window.location.href = 'animales.html';
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Nueva Tarea - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .task-form-sheet {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="tareas.html" class="btn-icon" aria-label="Volver a tareas" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="mb-2 text-center text-md-left" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <h1 class="title-hero" style="font-size: 1.65rem;">TAREAS</h1>
+        <p class="text-caption text-bold text-primary text-uppercase mt-1" style="letter-spacing: 0.08em;">
+          Crear Nueva Tarea
+        </p>
+      </section>
+
+      <!-- Formulario de Creación de Tarea (Fiel a Stitch) -->
+      <form class="task-form-sheet" id="crearTareaForm" onsubmit="handleCreateTask(event)">
+        
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="taskTitleInput">Título</label>
+          <input 
+            type="text" 
+            id="taskTitleInput" 
+            class="form-control" 
+            placeholder="Ej. Baño y cepillado de Mango" 
+            required
+          >
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="taskDescInput">Descripción</label>
+          <textarea 
+            id="taskDescInput" 
+            rows="4" 
+            class="form-control" 
+            placeholder="Detalla los requerimientos o cuidados especiales de la tarea..." 
+            style="resize: vertical; font-size: 0.95rem;" 
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" for="taskVolunteerSelect">Asignar Voluntario</label>
+          <select id="taskVolunteerSelect" class="form-control" required style="appearance: auto;">
+            <option value="" disabled selected>Selecciona un voluntario</option>
+            <option value="tomas">Tomas Alonso (Disponible - Turno Mañana)</option>
+            <option value="sofia">Sofia Martin (Turno Tarde)</option>
+            <option value="franco">Franco Gomez (Turno Tarde)</option>
+            <option value="matias">Matias Rodriguez (Turno Mañana)</option>
+            <option value="lucia">Lucía Gómez (Turno Mañana)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.35);">
+          Crear Tarea
+        </button>
+
+      </form>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+    function handleCreateTask(e) {
+      e.preventDefault();
+      alert('¡Tarea asignada con éxito al voluntario!');
+      window.location.href = 'tareas.html';
+    }
+  </script>
+</body>
+</html>
+

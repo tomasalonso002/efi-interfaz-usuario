@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patitas Conectadas - Refugio de Animales</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Estilos responsivos para la landing */
+    .landing-shell {
+      max-width: 1080px;
+    }
+
+    .landing-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: var(--space-4);
+      gap: var(--space-3);
+    }
+
+    .brand-icon-box {
+      width: 76px;
+      height: 76px;
+      border-radius: var(--radius-xl);
+      background-color: #fff4ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.3rem;
+      box-shadow: 0 4px 16px rgba(223, 112, 84, 0.15);
+    }
+
+    .landing-headline {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: var(--font-weight-extrabold);
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      line-height: 1.15;
+    }
+
+    .landing-subheadline {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .landing-card-intro {
+      background-color: #fffaf5;
+      border: 1px solid #f6ece0;
+      border-radius: var(--radius-xl);
+      padding: clamp(1rem, 2.5vw, 1.75rem);
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .landing-card-intro p {
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      line-height: 1.6;
+      color: #2c2f33;
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Grilla de tarjetas con fotos */
+    .feature-tile {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16 / 13;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .feature-tile:hover img {
+      transform: scale(1.05);
+    }
+
+    .feature-tile__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-3);
+    }
+
+    .feature-tile__label {
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: var(--font-weight-bold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+
+    /* Botón flotante de favorito */
+    .tile-fav-btn {
+      position: absolute;
+      bottom: var(--space-2);
+      right: var(--space-2);
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-circle);
+      background-color: rgba(255, 255, 255, 0.95);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ef4444;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition-fast);
+    }
+
+    .tile-fav-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .top-color-stripe {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, #df7054 0%, #f59e0b 50%, #16a34a 100%);
+    }
+
+    /* Grilla de secciones adaptable en Desktop */
+    .landing-sections-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (min-width: 860px) {
+      .landing-sections-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+    .auth-actions-bar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 440px;
+      width: 100%;
+      margin: var(--space-2) auto 0;
+    }
+
+    @media (min-width: 640px) {
+      .auth-actions-bar {
+        flex-direction: row;
+        max-width: 540px;
+      }
+      .auth-actions-bar .btn {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell landing-shell">
+    
+    <!-- Franja superior decorativa -->
+    <div class="top-color-stripe" aria-hidden="true"></div>
+
+    <!-- Header adaptable (Mobile & Desktop) -->
+    <header class="app-header">
+      <div class="brand-badge">
+        <span class="brand-paw">🐾</span>
+        <span>Patitas Conectadas</span>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación principal">
+        <a href="#heading-refugio" class="header-nav-link">Nuestro Refugio</a>
+        <a href="#heading-animales" class="header-nav-link">Nuestros Animales</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <a href="iniciar_sesion.html" class="btn btn-secondary btn-sm">Iniciar Sesión</a>
+        <a href="registrarme.html" class="btn btn-primary btn-sm d-mobile-none">Registrarme</a>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+      
+      <!-- Bloque Hero -->
+      <section class="landing-hero" aria-label="Bienvenida al refugio">
+        <div class="brand-icon-box" aria-hidden="true">
+          🐾
+        </div>
+        <div>
+          <h1 class="landing-headline">PATITAS CONECTADAS</h1>
+          <p class="landing-subheadline">Refugio de Animales desde 2015</p>
+        </div>
+
+        <div class="landing-card-intro">
+          <p>
+            En <strong>Patitas Conectadas</strong> rescatamos, cuidamos y encontramos familias amorosas para perros, gatos y más. Unite a nuestra misión.
+          </p>
+        </div>
+      </section>
+
+      <!-- Grilla de Secciones Adaptable (1 col en Mobile, 2 col en Desktop) -->
+      <div class="landing-sections-grid">
+        
+        <!-- Sección: Nuestro Refugio -->
+        <section aria-labelledby="heading-refugio">
+          <div class="d-flex justify-between align-center mb-3">
+            <h2 id="heading-refugio" class="title-section" style="font-size: 1.15rem;">Nuestro refugio</h2>
+            <span class="badge" style="background-color: #fef1ec; color: #c25235;">Espacios seguros</span>
+          </div>
+
+          <div class="grid-2">
+            <article class="feature-tile">
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Instalaciones del refugio con amplios jardines y parque al aire libre">
+              <div class="feature-tile__overlay">
+                <span class="feature-tile__label">🌲 Parque libre</span>
+              </div>
+            </article>
+
+            <article class="feature-tile">
+              <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=600&q=80" alt="Veterinarios y cuidadores atendiendo animales en la clínica del refugio">
+              <div class="feature-tile__overlay">
+                <span class="feature-tile__label">🩺 Cuidados 24/7</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Sección: Nuestros Animales -->
+        <section aria-labelledby="heading-animales">
+          <div class="d-flex justify-between align-center mb-3">
+            <h2 id="heading-animales" class="title-section" style="font-size: 1.15rem;">Nuestros Animales</h2>
+            <span class="badge badge-success">En adopción</span>
+          </div>
+
+          <div class="grid-2">
+            <article class="feature-tile">
+              <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Perro mestizo Milo listo para adopción con pañuelo">
+              <div class="feature-tile__overlay">
+                <span class="feature-tile__label">Milo (2 años)</span>
+              </div>
+              <button class="tile-fav-btn" aria-label="Guardar a Milo en favoritos" onclick="toggleFav(this)">
+                ❤️
+              </button>
+            </article>
+
+            <article class="feature-tile">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Gatita atigrada Luna recostada cómodamente en el refugio">
+              <div class="feature-tile__overlay">
+                <span class="feature-tile__label">Luna (8 meses)</span>
+              </div>
+              <button class="tile-fav-btn" aria-label="Guardar a Luna en favoritos" onclick="toggleFav(this)">
+                ❤️
+              </button>
+            </article>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Barra de Acciones Principales -->
+      <section class="auth-actions-bar" aria-label="Acciones de registro e ingreso">
+        <a href="registrarme.html" class="btn btn-primary btn-lg" style="box-shadow: 0 6px 18px rgba(223, 112, 84, 0.35);">
+          <span>👤+</span>
+          <span>Registrarme</span>
+        </a>
+
+        <a href="iniciar_sesion.html" class="btn btn-secondary btn-lg">
+          <span>➔</span>
+          <span>Iniciar Sesión</span>
+        </a>
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #16a34a;">📍</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados • Patitas Conectadas</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleFav(btn) {
+      const isFav = btn.classList.toggle('is-favorited');
+      btn.style.transform = 'scale(1.25)';
+      setTimeout(() => btn.style.transform = '', 200);
+      btn.setAttribute('aria-pressed', isFav);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarea Completada - Baño y Cepillado de Mango</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .task-detail-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Voluntario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="tareas.html" class="btn-icon" aria-label="Volver a la lista de tareas" title="Volver a tareas">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--vol">Vol.</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Pantalla -->
+      <section class="text-center mb-1">
+        <h1 class="title-hero" style="font-size: 1.55rem; letter-spacing: 0.04em;">DETALLE DE TAREAS</h1>
+        <div style="width: 48px; height: 3px; background-color: var(--color-primary); margin: var(--space-2) auto 0; border-radius: var(--radius-pill);"></div>
+      </section>
+
+      <!-- Ficha de Tarea Completada (Fiel a Stitch) -->
+      <article class="task-detail-card mt-2" aria-labelledby="completedTaskTitle">
+        
+        <div class="d-flex justify-between align-center">
+          <span class="badge badge-success" style="font-size: 0.85rem; padding: 6px 14px;">
+            <span class="badge-dot"></span> ✓ Completada
+          </span>
+          <span class="text-caption text-muted">Hoy, 10:30 AM</span>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light);"></div>
+
+        <div>
+          <h2 id="completedTaskTitle" class="title-card" style="font-size: 1.4rem;">
+            Baño y cepillado de Mango
+          </h2>
+          <span class="badge badge-trait mt-2" style="font-size: 0.78rem;">
+            Refugio Central · Zona Canina A
+          </span>
+        </div>
+
+        <div>
+          <h3 class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">DESCRIPCIÓN</h3>
+          <p class="text-body" style="font-size: 0.95rem; line-height: 1.6;">
+            Se le aplicó el champú medicado correspondiente por 10 minutos y se realizó el secado completo junto con el cepillado anti-nudos de Mango. El peludo se mostró dócil y se encuentra en óptimo estado descansando en su canil.
+          </p>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light);"></div>
+
+        <!-- Metadatos de Validación y Responsabilidad -->
+        <div class="d-flex flex-column gap-2" style="font-size: 0.92rem;">
+          <div class="d-flex justify-between align-center">
+            <span class="text-muted">Voluntario responsable:</span>
+            <strong class="text-main">Asignado a ti</strong>
+          </div>
+          <div class="d-flex justify-between align-center">
+            <span class="text-muted">Revisión de veterinaria:</span>
+            <strong class="text-success">✓ Aprobada</strong>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Botón de Retorno -->
+      <div class="mt-4" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <a href="tareas.html" class="btn btn-primary btn-block btn-lg" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.4);">
+          <span>←</span>
+          <span>Volver a Tareas</span>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados • Patitas Conectadas</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de voluntario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS CONECTADAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal Voluntario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>●</span>
+        </a>
+        <a href="nuestros_animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Animales - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .admin-animal-row {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-light);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      transition: all var(--transition-fast);
+    }
+    .admin-animal-row:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .admin-thumb-wrapper {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      flex-shrink: 0;
+    }
+    .admin-thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+    }
+    @media (min-width: 860px) {
+      .admin-animals-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-3">
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú de navegación" onclick="toggleDrawer()">
+          ☰
+        </button>
+        <div class="brand-badge d-mobile-none">
+          <span class="brand-paw">🐾</span>
+          <span>Patitas Conectadas</span>
+        </div>
+      </div>
+
+      <nav class="header-nav-desktop" aria-label="Navegación de administración">
+        <a href="inicio.html" class="header-nav-link">Inicio</a>
+        <a href="panel_administracion.html" class="header-nav-link">Resumen</a>
+        <a href="animales.html" class="header-nav-link is-active">Animales</a>
+        <a href="voluntarios.html" class="header-nav-link">Voluntarios</a>
+        <a href="solicitudes_adopcion.html" class="header-nav-link">Adopciones</a>
+        <a href="tareas.html" class="header-nav-link">Tareas</a>
+      </nav>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">
+          👤 Admin
+        </span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección y Botón Nuevo -->
+      <section class="d-flex justify-between align-center">
+        <div>
+          <h1 class="title-hero" style="font-size: 1.65rem;">Animales del Refugio</h1>
+          <p class="text-subtitle">15 animales registrados en el sistema</p>
+        </div>
+
+        <a href="nuevo_animal.html" class="btn btn-primary btn-sm" style="box-shadow: 0 4px 12px rgba(223, 112, 84, 0.35);">
+          <span>+</span>
+          <span>Nuevo Animal</span>
+        </a>
+      </section>
+
+      <!-- Lista de Animales en Administración -->
+      <section class="admin-animals-grid mt-3 d-flex flex-column gap-3" aria-label="Catálogo administrativo de animales">
+        
+        <!-- Larry -->
+        <article class="admin-animal-row">
+          <div class="admin-thumb-wrapper">
+            <span class="badge badge-success" style="position: absolute; top: 4px; left: 4px; font-size: 0.65rem; padding: 2px 6px;">
+              Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" alt="Larry">
+          </div>
+          <div class="flex-1">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Larry</h2>
+              <span class="badge badge-warning" style="font-size: 0.72rem;">En tratamiento</span>
+            </div>
+            <p class="text-caption text-muted">Perro mestizo · 3 años aprox.</p>
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <span class="text-caption text-success text-bold">✓ Vacunas al día</span>
+              <a href="detalle_animal.html?name=Larry" class="btn btn-secondary btn-sm">Gestionar ›</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Toby -->
+        <article class="admin-animal-row">
+          <div class="admin-thumb-wrapper">
+            <span class="badge badge-success" style="position: absolute; top: 4px; left: 4px; font-size: 0.65rem; padding: 2px 6px;">
+              Disponible
+            </span>
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80" alt="Toby">
+          </div>
+          <div class="flex-1">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Toby</h2>
+              <span class="badge badge-success" style="font-size: 0.72rem;">Sano</span>
+            </div>
+            <p class="text-caption text-muted">Perro mestizo grande · 2 años</p>
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <span class="text-caption text-primary text-bold">1 solicitud de adopción</span>
+              <a href="detalle_animal.html?name=Toby" class="btn btn-secondary btn-sm">Gestionar ›</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Luna -->
+        <article class="admin-animal-row">
+          <div class="admin-thumb-wrapper">
+            <span class="badge badge-danger" style="position: absolute; top: 4px; left: 4px; font-size: 0.65rem; padding: 2px 6px;">
+              Urgente
+            </span>
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80" alt="Luna">
+          </div>
+          <div class="flex-1">
+            <div class="d-flex justify-between align-start">
+              <h2 class="title-card" style="font-size: 1.15rem;">Luna</h2>
+              <span class="badge" style="background: #fdf2f8; color: #db2777; font-size: 0.72rem;">Medicación</span>
+            </div>
+            <p class="text-caption text-muted">Común europeo · 1 año</p>
+            <div class="d-flex justify-between align-center mt-2 pt-2" style="border-top: 1px solid var(--border-light);">
+              <span class="text-caption text-success text-bold">✓ Esterilizada</span>
+              <a href="detalle_animal.html?name=Luna" class="btn btn-secondary btn-sm">Gestionar ›</a>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+  </script>
+</body>
+</html>
+

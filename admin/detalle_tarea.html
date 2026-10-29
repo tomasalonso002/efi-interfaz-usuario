@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Tarea - Administración | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .admin-task-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .vol-assigned-box {
+      background-color: #faf8f5;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .vol-assigned-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-circle);
+      background-color: #e2e8f0;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-weight-bold);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .special-note-box {
+      background-color: #fff9f6;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #9a3412;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="tareas.html" class="btn-icon" aria-label="Volver a tareas" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS CONECTADAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Admin</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Sección -->
+      <section class="text-center mb-1">
+        <h1 class="title-hero" style="font-size: 1.55rem; letter-spacing: 0.04em;">DETALLE DE TAREAS</h1>
+        <p class="text-subtitle mt-1">Gestión interna del refugio</p>
+      </section>
+
+      <!-- Ficha de Tarea Administrativa (Fiel a Stitch) -->
+      <article class="admin-task-card" aria-label="Detalles de la tarea">
+        
+        <div class="d-flex justify-between align-center">
+          <span class="badge badge-warning" style="border: 1px solid #fde047;">
+            <span class="badge-dot"></span> En progreso
+          </span>
+          <span class="text-caption text-muted text-bold">#TAR-0842</span>
+        </div>
+
+        <div>
+          <span class="text-caption text-primary text-bold text-uppercase" style="letter-spacing: 0.06em;">
+            Asignación Canina
+          </span>
+          <h2 class="title-card mt-1" style="font-size: 1.35rem;">
+            Baño y cepillado de Mango
+          </h2>
+        </div>
+
+        <!-- Caja de Voluntario Asignado -->
+        <div class="vol-assigned-box">
+          <div class="d-flex align-center gap-3">
+            <div class="vol-assigned-avatar" aria-hidden="true">F</div>
+            <div>
+              <span class="text-caption text-muted text-uppercase text-bold">Voluntario asignado</span>
+              <strong class="d-block text-main" style="font-size: 0.95rem;">Franco (Sector A)</strong>
+            </div>
+          </div>
+          <span class="text-caption text-muted">Hoy, 10:30 AM</span>
+        </div>
+
+        <!-- Descripción Operativa -->
+        <div>
+          <h3 class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">DESCRIPCIÓN</h3>
+          <p class="text-body" style="font-size: 0.95rem; line-height: 1.6;">
+            Realizar el baño templado con champú dermatológico antipulgas para Mango (Golden Retriever de 2 años). Es importante cepillar su manto antes de mojarlo para retirar el pelo muerto acumulado. Asegurar secado completo con toalla y secador a temperatura templada para prevenir dermatitis en sus patas.
+          </p>
+        </div>
+
+        <!-- Nota Especial -->
+        <div class="special-note-box">
+          <p><strong>Nota especial:</strong> Mango tiene piel sensible, usar únicamente el champú medicado de avena ubicado en el botiquín 2.</p>
+          <p class="mt-1"><strong>Área:</strong> Box de lavado exterior #1.</p>
+        </div>
+
+        <div style="border-top: 1px dashed var(--border-light); margin-top: var(--space-1);"></div>
+
+        <div class="d-flex justify-between align-center" style="font-size: 0.85rem; color: var(--text-muted);">
+          <span>Prioridad: <strong>Media-Alta</strong></span>
+          <span>Actualizado hace 20 min</span>
+        </div>
+
+      </article>
+
+      <!-- Botones de Acción (3 niveles jerárquicos de Stitch) -->
+      <div class="d-flex flex-column gap-3 mt-3" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <button class="btn btn-primary btn-block btn-lg" onclick="alert('Tarea validada y marcada como completada por el administrador.'); window.location.href='tareas.html';" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.4);">
+          <span>✓</span>
+          <span>Completar</span>
+        </button>
+
+        <a href="tareas.html" class="btn btn-secondary btn-block btn-lg">
+          <span>←</span>
+          <span>Volver</span>
+        </a>
+
+        <button class="btn btn-secondary btn-block" onclick="openDeleteTaskModal()" style="color: var(--color-danger); border-color: #fecaca;">
+          <span>🗑️</span>
+          <span>Eliminar Tarea</span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal Confirmación Eliminar Tarea -->
+  <div class="modal-overlay" id="deleteTaskModal" onclick="if(event.target === this) closeDeleteTaskModal()">
+    <div class="modal-card">
+      <div class="modal-icon-badge modal-icon-badge--danger">🗑️</div>
+      <h2 class="modal-title" style="font-size: 1.35rem;">Eliminar Tarea</h2>
+      <p class="modal-desc">¿Estás seguro de que deseas eliminar esta tarea de la programación del refugio?</p>
+      <div class="modal-warning-tag">⚠️ Se removerá de la lista del voluntario</div>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-block" onclick="alert('Tarea eliminada.'); window.location.href='tareas.html';">
+          Sí, eliminar tarea
+        </button>
+        <button class="btn btn-secondary btn-block" onclick="closeDeleteTaskModal()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+    function openDeleteTaskModal() {
+      document.getElementById('deleteTaskModal').classList.add('is-active');
+    }
+    function closeDeleteTaskModal() {
+      document.getElementById('deleteTaskModal').classList.remove('is-active');
+    }
+  </script>
+</body>
+</html>
+

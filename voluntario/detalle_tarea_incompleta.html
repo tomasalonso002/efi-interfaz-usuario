@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Tarea - Baño y Cepillado de Mango</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .task-detail-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 3.5vw, 2rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .meta-tag-box {
+      background-color: #fffaf7;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      color: #9a3412;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Voluntario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="tareas.html" class="btn-icon" aria-label="Volver a la lista de tareas" title="Volver a tareas">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--vol">Vol.</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Pantalla -->
+      <section class="text-center mb-1">
+        <h1 class="title-hero" style="font-size: 1.55rem; letter-spacing: 0.04em;">DETALLE DE TAREAS</h1>
+        <p class="text-subtitle mt-1">Patitas Conectadas • Refugio Central</p>
+      </section>
+
+      <!-- Ficha de Tarea Incompleta (Fiel a Stitch) -->
+      <article class="task-detail-card" aria-labelledby="taskTitle">
+        <div>
+          <div class="d-flex justify-between align-start">
+            <span class="text-caption text-bold text-primary text-uppercase" style="letter-spacing: 0.05em;">
+              Ficha de Tarea
+            </span>
+            <span class="badge badge-warning" style="border: 1px solid #fde047;">
+              <span class="badge-dot"></span> Pendiente
+            </span>
+          </div>
+
+          <h2 id="taskTitle" class="title-card mt-1" style="font-size: 1.4rem;">
+            Baño y cepillado de Mango
+          </h2>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light);"></div>
+
+        <!-- Parámetros de Tiempo y Área -->
+        <div class="grid-2">
+          <div class="d-flex align-center gap-2">
+            <span style="font-size: 1.25rem;">⏱️</span>
+            <div>
+              <span class="text-caption text-muted">Tiempo est.:</span>
+              <strong class="d-block text-main" style="font-size: 0.95rem;">30 min</strong>
+            </div>
+          </div>
+
+          <div class="d-flex align-center gap-2">
+            <span style="font-size: 1.25rem;">🏢</span>
+            <div>
+              <span class="text-caption text-muted">Área:</span>
+              <strong class="d-block text-main" style="font-size: 0.95rem;">Lavandería / Canil 3</strong>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light);"></div>
+
+        <!-- Descripción Operativa de la Tarea -->
+        <div>
+          <h3 class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">DESCRIPCIÓN</h3>
+          <p class="text-body" style="font-size: 0.95rem; line-height: 1.6;">
+            Realizar el baño templado con champú dermatológico antipulgas para Mango (Golden Retriever de 2 años). Es importante cepillar su manto antes de mojarlo para retirar el pelo muerto acumulado. Asegurar secado completo con toalla y secador a temperatura templada para prevenir dermatitis en sus patas.
+          </p>
+        </div>
+
+        <!-- Nota Veterinaria Especial -->
+        <div class="meta-tag-box">
+          <strong>Nota del equipo veterinario:</strong> Mango suele ponerse nervioso con el sonido fuerte del secador; mantener refuerzo positivo con golosinas permitidas en el área.
+        </div>
+      </article>
+
+      <!-- Botones de Acción (Affordance y estados) -->
+      <div class="d-flex flex-column gap-3 mt-3" style="max-width: 680px; margin-left: auto; margin-right: auto; width: 100%;">
+        <button class="btn btn-primary btn-block btn-lg" onclick="completeTask()" style="box-shadow: 0 8px 24px rgba(223, 112, 84, 0.4);">
+          <span>✓</span>
+          <span>Completar</span>
+        </button>
+
+        <a href="tareas.html" class="btn btn-secondary btn-block btn-lg">
+          Volver
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de voluntario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS CONECTADAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal Voluntario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>●</span>
+        </a>
+        <a href="nuestros_animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    function completeTask() {
+      alert('¡Excelente trabajo! Tarea marcada como completada con éxito.');
+      window.location.href = 'detalle_tarea_completa.html';
+    }
+  </script>
+</body>
+</html>
+

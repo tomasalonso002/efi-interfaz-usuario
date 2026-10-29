@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Voluntario - Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .vol-profile-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 4vw, 2.25rem);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-3);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .vol-avatar-lg-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .vol-avatar-lg {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-circle);
+      border: 3.5px solid var(--color-primary);
+      object-fit: cover;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .vol-verified-dot {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      background-color: var(--color-success);
+      color: #ffffff;
+      border-radius: var(--radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border: 2px solid #ffffff;
+    }
+
+    .info-list-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .info-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .info-list-item:last-child {
+      border-bottom: none;
+    }
+
+    @media (min-width: 860px) {
+      .vol-detail-columns {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: var(--space-6);
+        max-width: 980px;
+        margin: 0 auto;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Administrador -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="voluntarios.html" class="btn-icon" aria-label="Volver a lista de voluntarios" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--admin">Adm</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <div class="vol-detail-columns">
+        
+        <!-- Columna Izquierda: Perfil y Datos Básicos -->
+        <section class="vol-profile-card">
+          <div class="vol-avatar-lg-wrapper">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Tomas Alonso" class="vol-avatar-lg">
+            <span class="vol-verified-dot" title="Voluntario Verificado">✓</span>
+          </div>
+
+          <div>
+            <h1 class="title-card" style="font-size: 1.45rem;">Tomas Alonso</h1>
+            <p class="text-caption text-muted mt-1">Voluntario Activo • Refugio Central</p>
+          </div>
+
+          <div class="d-flex gap-2 flex-wrap justify-center mt-1">
+            <span class="badge badge-success">
+              <span class="badge-dot"></span> Disponible para tareas
+            </span>
+            <span class="badge" style="background-color: #f1f5f9; color: var(--text-main);">
+              Turno Mañana
+            </span>
+          </div>
+        </section>
+
+        <!-- Columna Derecha: Información Personal y Tareas Recientes -->
+        <div class="d-flex flex-column gap-4">
+          
+          <!-- Información Personal -->
+          <article class="info-list-card">
+            <span class="form-label text-muted" style="font-size: 0.8rem;">INFORMACIÓN PERSONAL</span>
+
+            <div class="info-list-item">
+              <div class="d-flex align-center gap-3">
+                <span style="font-size: 1.25rem;">🪪</span>
+                <div>
+                  <span class="text-caption text-muted">DNI / Documento</span>
+                  <strong class="d-block text-main" style="font-size: 0.95rem;">44606642</strong>
+                </div>
+              </div>
+              <span class="badge badge-success" style="font-size: 0.72rem;">Verificado</span>
+            </div>
+
+            <div class="info-list-item">
+              <div class="d-flex align-center gap-3">
+                <span style="font-size: 1.25rem;">📞</span>
+                <div>
+                  <span class="text-caption text-muted">Teléfono</span>
+                  <strong class="d-block text-main" style="font-size: 0.95rem;">3587489652</strong>
+                </div>
+              </div>
+              <a href="tel:3587489652" class="btn-icon" style="width: 34px; height: 34px; font-size: 0.9rem;" title="Llamar">➔</a>
+            </div>
+
+            <div class="info-list-item">
+              <div class="d-flex align-center gap-3">
+                <span style="font-size: 1.25rem;">✉️</span>
+                <div>
+                  <span class="text-caption text-muted">Correo Electrónico (Gmail)</span>
+                  <strong class="d-block text-main" style="font-size: 0.95rem;">tomas@gmail.com</strong>
+                </div>
+              </div>
+              <a href="mailto:tomas@gmail.com" class="btn-icon" style="width: 34px; height: 34px; font-size: 0.9rem;" title="Enviar correo">➔</a>
+            </div>
+          </article>
+
+          <!-- Tareas Recientes -->
+          <article class="info-list-card">
+            <div class="d-flex justify-between align-center">
+              <span class="form-label text-muted" style="font-size: 0.8rem; margin: 0;">TAREAS RECIENTES</span>
+              <span class="text-caption text-primary text-bold">3 completadas</span>
+            </div>
+
+            <div class="d-flex justify-between align-center p-2" style="background: #faf8f5; border-radius: var(--radius-md);">
+              <span class="text-bold" style="font-size: 0.9rem;">● Baño y cepillado de Mango</span>
+              <span class="text-caption text-muted">Ayer</span>
+            </div>
+
+            <div class="d-flex justify-between align-center p-2" style="background: #faf8f5; border-radius: var(--radius-md);">
+              <span class="text-bold" style="font-size: 0.9rem;">● Paseo de Larry</span>
+              <span class="badge badge-warning" style="font-size: 0.72rem;">En curso</span>
+            </div>
+          </article>
+
+          <!-- Acciones de Gestión -->
+          <div>
+            <span class="form-label text-muted mb-2 d-block" style="font-size: 0.8rem;">ACCIONES DE GESTIÓN</span>
+            <div class="grid-2">
+              <a href="nuevo_voluntario.html?edit=tomas" class="btn btn-primary btn-block">
+                <span>✏️</span>
+                <span>Editar</span>
+              </a>
+              <button class="btn btn-secondary btn-block" onclick="openDeleteVolModal()" style="color: var(--color-danger); border-color: #fecaca;">
+                <span>🗑️</span>
+                <span>Eliminar</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal Confirmación Eliminar Voluntario -->
+  <div class="modal-overlay" id="deleteVolModal" onclick="if(event.target === this) closeDeleteVolModal()">
+    <div class="modal-card">
+      <div class="modal-icon-badge modal-icon-badge--danger">🗑️</div>
+      <h2 class="modal-title" style="font-size: 1.35rem;">Eliminar Voluntario</h2>
+      <p class="modal-desc">¿Estás seguro de que deseas dar de baja el perfil de Tomas Alonso?</p>
+      <div class="modal-warning-tag">⚠️ Perderá acceso al sistema</div>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-block" onclick="alert('Voluntario dado de baja.'); window.location.href='voluntarios.html';">
+          Sí, dar de baja
+        </button>
+        <button class="btn btn-secondary btn-block" onclick="closeDeleteVolModal()">
+          No, Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de administración">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <div class="d-flex align-center gap-2">
+              <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS</span>
+              <span class="badge" style="background-color: #fef2f0; color: #df7054; border: 1px solid #f8cfc5; font-size: 0.65rem; padding: 2px 6px;">ADMIN</span>
+            </div>
+            <p class="text-caption text-muted">Gestión y Bienestar Animal</p>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span>›</span>
+        </a>
+        <a href="voluntarios.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>👥</span><span>Voluntarios</span></div>
+          <span>●</span>
+        </a>
+        <a href="solicitudes_adopcion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>❤️</span><span>Adopciones</span></div>
+          <span>›</span>
+        </a>
+        <a href="animales.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>›</span>
+        </a>
+        <a href="panel_administracion.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📊</span><span>Resumen</span></div>
+          <span>›</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+    function openDeleteVolModal() {
+      document.getElementById('deleteVolModal').classList.add('is-active');
+    }
+    function closeDeleteVolModal() {
+      document.getElementById('deleteVolModal').classList.remove('is-active');
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de Larry - Portal Voluntario | Patitas Conectadas</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .vol-detail-card {
+      background-color: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-light);
+      padding: clamp(1.25rem, 3.5vw, 2rem);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .vol-carousel-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background-color: var(--bg-surface-subtle);
+    }
+
+    .vol-carousel-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-tag-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: var(--font-weight-bold);
+      backdrop-filter: blur(4px);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-circle);
+      background-color: rgba(0, 0, 0, 0.45);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all var(--transition-fast);
+    }
+    .carousel-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .carousel-arrow--prev { left: var(--space-3); }
+    .carousel-arrow--next { right: var(--space-3); }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Header Voluntario -->
+    <header class="app-header">
+      <div class="d-flex align-center gap-2">
+        <a href="nuestros_animales.html" class="btn-icon" aria-label="Volver a lista de animales" title="Volver">
+          ‹
+        </a>
+        <button class="btn-icon" id="openDrawerBtn" aria-label="Abrir menú" onclick="toggleDrawer()">
+          ☰
+        </button>
+      </div>
+
+      <div class="brand-badge d-mobile-none">
+        <span class="brand-paw">🐾</span>
+        <span>PATITAS</span>
+      </div>
+
+      <div class="d-flex align-center gap-2">
+        <span class="role-badge role-badge--vol">Vol.</span>
+      </div>
+    </header>
+
+    <main class="app-main" id="main-content">
+
+      <!-- Título de Pantalla -->
+      <section class="text-center mb-1">
+        <h1 class="title-hero" style="font-size: 1.65rem;">Detalles de “Larry”</h1>
+      </section>
+
+      <!-- Ficha Técnica de Larry (Fiel a Stitch) -->
+      <article class="vol-detail-card" aria-label="Ficha de Larry">
+        
+        <!-- Carrusel Fotográfico con Tag Central -->
+        <div class="vol-carousel-container">
+          <img id="larryImg" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Larry sentado en el césped del refugio">
+          <span class="photo-tag-badge">Fotos</span>
+          <button class="carousel-arrow carousel-arrow--prev" onclick="prevPhoto()" aria-label="Foto anterior">‹</button>
+          <button class="carousel-arrow carousel-arrow--next" onclick="nextPhoto()" aria-label="Siguiente foto">›</button>
+        </div>
+
+        <!-- Metadatos de Salud y Físicos -->
+        <div class="d-flex flex-column gap-3 pt-2">
+          <div class="d-flex justify-between align-center" style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2);">
+            <div style="font-size: 1.05rem;">
+              <strong class="text-main">Edad:</strong> <span class="text-muted">2 años</span>
+            </div>
+            <span class="badge badge-success" style="font-size: 0.8rem; padding: 4px 10px;">
+              <span class="badge-dot"></span> Disponible
+            </span>
+          </div>
+
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2); font-size: 1.05rem;">
+            <strong class="text-main">Tamaño:</strong> <span class="text-muted">Grande</span>
+          </div>
+
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: var(--space-2); font-size: 1.05rem;">
+            <strong class="text-main">Estado de salud:</strong> <span class="text-muted">Sano. Vacunado y desparasitado</span>
+          </div>
+
+          <!-- Cuadro de Personalidad -->
+          <div class="p-3" style="background-color: #fffaf6; border: 1px solid #fed7aa; border-radius: var(--radius-lg); font-size: 0.95rem; line-height: 1.55; color: var(--text-body);">
+            Muy juguetón, muy hiperactivo, así que se requiere un patio.
+          </div>
+        </div>
+
+        <!-- Botones de Acción (2 columnas: Editar y Eliminar) -->
+        <div class="grid-2 mt-2">
+          <a href="editar_animal.html" class="btn btn-primary btn-block">
+            <span>✏️</span>
+            <span>Editar Animal</span>
+          </a>
+
+          <button class="btn btn-secondary btn-block" onclick="openDeleteModal()" style="color: var(--color-danger); border-color: #fecaca;">
+            <span>🗑️</span>
+            <span>Eliminar</span>
+          </button>
+        </div>
+
+      </article>
+
+    </main>
+
+    <!-- Footer común -->
+    <footer class="app-footer">
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-size: 0.8rem;">
+        <span style="color: #df7054;">🗺️</span>
+        <span>Maps</span>
+      </a>
+      <p class="footer-copy">Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal de Confirmación de Borrado con Salvaguarda (especioficaciones.md) -->
+  <div class="modal-overlay" id="deleteModal" onclick="if(event.target === this) closeDeleteModal()">
+    <div class="modal-card">
+      <div class="modal-icon-badge modal-icon-badge--danger">🗑️</div>
+      <h2 class="modal-title" style="font-size: 1.35rem;">Eliminar Animal</h2>
+      <p class="modal-desc">¿Estás seguro que querés eliminar a Larry del sistema?</p>
+      <div class="modal-warning-tag">⚠️ ¡Esta acción es irreversible!</div>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-block" onclick="confirmDelete()">
+          🗑️ Sí, borrar el animal
+        </button>
+        <button class="btn btn-secondary btn-block" onclick="closeDeleteModal()">
+          No, Volver
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target === this) toggleDrawer()">
+    <aside class="drawer-menu" aria-label="Menú de voluntario">
+      <div class="d-flex align-center justify-between">
+        <div class="d-flex align-center gap-2">
+          <div class="brand-paw" style="font-size: 1.8rem; background: #fff1eb; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            🐾
+          </div>
+          <div>
+            <span class="text-bold text-main" style="letter-spacing: 0.05em; font-size: 1.05rem;">PATITAS CONECTADAS</span>
+            <div>
+              <span class="badge badge-success" style="font-size: 0.7rem; padding: 2px 8px;">
+                <span class="badge-dot"></span> Portal Voluntario
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-icon" aria-label="Cerrar menú" onclick="toggleDrawer()" style="width: 36px; height: 36px;">
+          ✕
+        </button>
+      </div>
+
+      <nav class="d-flex flex-column gap-2 mt-3" aria-label="Navegación">
+        <a href="inicio.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>🏠</span><span>Inicio</span></div>
+          <span>›</span>
+        </a>
+        <a href="tareas.html" class="drawer-nav-item">
+          <div class="drawer-nav-item__left"><span>📋</span><span>Tareas</span></div>
+          <span class="badge" style="background-color: #fff1ec; color: #df7054; font-size: 0.75rem;">3 hoy</span>
+        </a>
+        <a href="nuestros_animales.html" class="drawer-nav-item is-active">
+          <div class="drawer-nav-item__left"><span>🐾</span><span>Animales</span></div>
+          <span>●</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto d-flex flex-column gap-2">
+        <a href="../autenticacion/inicio.html" class="btn btn-secondary btn-block">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawerBackdrop').classList.toggle('is-open');
+    }
+
+    const photos = [
+      'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80'
+    ];
+    let photoIndex = 0;
+
+    function nextPhoto() {
+      photoIndex = (photoIndex + 1) % photos.length;
+      document.getElementById('larryImg').src = photos[photoIndex];
+    }
+    function prevPhoto() {
+      photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+      document.getElementById('larryImg').src = photos[photoIndex];
+    }
+
+    function openDeleteModal() {
+      document.getElementById('deleteModal').classList.add('is-active');
+    }
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.remove('is-active');
+    }
+    function confirmDelete() {
+      alert('Animal eliminado del sistema.');
+      window.location.href = 'nuestros_animales.html';
+    }
+  </script>
+</body>
+</html>
+
